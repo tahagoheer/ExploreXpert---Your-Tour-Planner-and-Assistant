@@ -1,3 +1,4 @@
+import 'package:explorexpert/features/user_auth/presentation/pages/forgot_password_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
@@ -47,7 +48,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height * 0.70,
                 decoration: const BoxDecoration(
-                    color: Color.fromRGBO(252, 252, 252, 0.8),
+                    color: Color.fromRGBO(252, 252, 252, 0.75),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(55),
                         topRight: Radius.circular(55))),
@@ -90,7 +91,7 @@ class LoginPage extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const SignUpPage()),
+                                            const ForgotPasswordPage()),
                                     (route) => false);
                               },
                               child: const Text(

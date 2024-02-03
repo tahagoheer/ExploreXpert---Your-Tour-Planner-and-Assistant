@@ -1,10 +1,11 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
+import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class ForgotPasswordPage extends StatelessWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,10 @@ class SignUpPage extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(
                               bottom:
-                                  MediaQuery.of(context).size.height * 0.02),
+                                  MediaQuery.of(context).size.height * 0.05),
                           child: const Text(
-                            'Welcome!',
+                            'Forgot\nPassword ?',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
@@ -70,38 +72,19 @@ class SignUpPage extends StatelessWidget {
                           ),
                         ),
                         const FormFieldContainerWidget(
-                          hintText: 'Enter Username',
-                          labelText: 'Username',
-                          isPasswordField: false,
-                        ),
-                        const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
-                          hintText: 'Enter Your Email',
+                          hintText: 'Email',
                           labelText: 'Email',
                           isPasswordField: false,
                         ),
-                        const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
-                          hintText: 'Set a Password',
-                          labelText: 'Password',
-                          isPasswordField: true,
-                        ),
-                        const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
-                          hintText: 'Confirm Your Password',
-                          labelText: 'Confirm Password',
-                          isPasswordField: true,
-                        ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 45),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: MaterialButton(
                             onPressed: () {
-                              Navigator.pushAndRemoveUntil(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
-                                  (route) => false);
+                                      builder: (context) => const LoginPage()));
                             },
                             color: EXColors.primaryDark,
                             height: 60,
@@ -110,7 +93,7 @@ class SignUpPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15)),
                             child: const Center(
                                 child: Text(
-                              'Sign Up',
+                              'Submit',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -118,15 +101,10 @@ class SignUpPage extends StatelessWidget {
                             )),
                           ),
                         ),
+                        const SizedBox(height: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Already have an account?",
-                                style: TextStyle(fontSize: 16)),
-                            const SizedBox(
-                              width: 3,
-                              height: 60,
-                            ),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushAndRemoveUntil(
@@ -143,7 +121,39 @@ class SignUpPage extends StatelessWidget {
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
+                            const SizedBox(
+                              width: 3,
+                              height: 60,
+                            ),
+                            const Text(
+                              "|",
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: EXColors.secondaryMedium),
+                            ),
+                            const SizedBox(
+                              width: 3,
+                              height: 60,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpPage()),
+                                    (route) => false);
+                              },
+                              child: const Text(
+                                'SignUp',
+                                style: TextStyle(
+                                    color: EXColors.primaryDark,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ],
                         ),
                       ],

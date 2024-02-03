@@ -1,6 +1,8 @@
 import 'package:explorexpert/features/app/splash_screen.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {

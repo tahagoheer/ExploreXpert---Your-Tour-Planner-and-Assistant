@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Firebase',
+      title: 'ExploreXpert',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: EXColors.primaryDark),
         useMaterial3: true,

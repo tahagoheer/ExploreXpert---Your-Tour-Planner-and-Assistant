@@ -1,5 +1,5 @@
 import 'package:explorexpert/features/app/splash_screen.dart';
-import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
+import 'package:explorexpert/features/user_auth/presentation/pages/auth_via_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(
-        child: LoginPage(),
+        child: AuthViaPage(),
       ),
     );
   }

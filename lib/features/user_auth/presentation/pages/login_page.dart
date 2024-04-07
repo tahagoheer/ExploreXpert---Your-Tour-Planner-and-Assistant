@@ -107,7 +107,7 @@ class LoginPage extends StatelessWidget {
                             )
                           ],
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: MaterialButton(
@@ -160,6 +160,105 @@ class LoginPage extends StatelessWidget {
                             )
                           ],
                         ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: Divider(
+                                color: EXColors.secondaryMedium,
+                                height: 20,
+                                thickness: 1,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'OR',
+                                style: TextStyle(
+                                    color: EXColors.secondaryMedium,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: Divider(
+                                color: EXColors.secondaryMedium,
+                                height: 20,
+                                thickness: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUpPage()));
+                                },
+                                color: Colors.white,
+                                height: 60,
+                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: const Center(
+                                  child: Icon(Icons.g_mobiledata),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUpPage()));
+                                },
+                                color: Colors.white,
+                                height: 60,
+                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: const Center(
+                                  child: Icon(Icons.facebook),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUpPage()));
+                                },
+                                color: Colors.white,
+                                height: 60,
+                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: const Center(
+                                  child: Icon(Icons.apple),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),

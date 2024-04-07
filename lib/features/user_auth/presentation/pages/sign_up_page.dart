@@ -3,9 +3,14 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,13 +101,7 @@ class SignUpPage extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: MaterialButton(
-                            onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
-                                  (route) => false);
-                            },
+                            onPressed: () => print('Signup button pressed !'),
                             color: EXColors.primaryDark,
                             height: 60,
                             mouseCursor: MaterialStateMouseCursor.clickable,

@@ -25,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.30,
+                height: MediaQuery.of(context).size.height * 0.25,
                 child: Padding(
                   padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.1),
@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.70,
+                height: MediaQuery.of(context).size.height * 0.75,
                 decoration: const BoxDecoration(
                     color: Color.fromRGBO(252, 252, 252, 0.75),
                     borderRadius: BorderRadius.only(

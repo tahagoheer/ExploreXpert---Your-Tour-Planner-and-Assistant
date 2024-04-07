@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "712970756898",
+    "project_id": "explorexpert-68106",
+    "storage_bucket": "explorexpert-68106.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712970756898:android:60844d23253405f47afb7b",
+        "android_client_info": {
+          "package_name": "com.example.explorexpert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzxKEslGHDrL9Xx1b5e1hr7b62uBhPd-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

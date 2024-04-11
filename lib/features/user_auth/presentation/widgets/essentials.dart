@@ -7,4 +7,5 @@ abstract final class EXColors {
   static const Color secondaryDark = Color(0xFF000000);
   static const Color secondaryMedium = Color(0xFF626262);
   static const Color secondaryLight = Color(0xFFFFFFFF);
+  static const Color warning = Color(0xFFFF0000);
 }

@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '712970756898',
     projectId: 'explorexpert-68106',
     storageBucket: 'explorexpert-68106.appspot.com',
+    iosClientId: '712970756898-jd3mge8m7m6jkt3spej7r5c2uah1mfbn.apps.googleusercontent.com',
     iosBundleId: 'com.example.explorexpert',
   );
 }

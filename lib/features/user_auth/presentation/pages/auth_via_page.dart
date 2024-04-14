@@ -1,10 +1,18 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class AuthViaPage extends StatelessWidget {
+class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
+
+  @override
+  State<AuthViaPage> createState() => _AuthViaPageState();
+}
+
+class _AuthViaPageState extends State<AuthViaPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -151,13 +159,7 @@ class AuthViaPage extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.70,
                               child: MaterialButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignUpPage()));
-                                },
+                                onPressed: _handleGoogleSignIn,
                                 color: Colors.white,
                                 height: 50,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
@@ -274,5 +276,14 @@ class AuthViaPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleGoogleSignIn() {
+    try {
+      GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
+      _auth.signInWithProvider(_googleAuthProvider);
+    } catch (error) {
+      print(error);
+    }
   }
 }

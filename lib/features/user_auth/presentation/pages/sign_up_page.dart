@@ -1,7 +1,12 @@
+import 'package:explorexpert/features/user_auth/presentation/pages/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../global/toast.dart';
+import '../../firebase_auth_implementation/firebase_auth_services.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -11,6 +16,22 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  bool isSigningUp = false;
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,34 +95,40 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                           ),
                         ),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Enter Username',
                           labelText: 'Username',
                           isPasswordField: false,
+                          controller: _usernameController,
                         ),
                         const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Enter Your Email',
                           labelText: 'Email',
                           isPasswordField: false,
+                          controller: _emailController,
                         ),
                         const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Set a Password',
                           labelText: 'Password',
                           isPasswordField: true,
+                          controller: _passwordController,
                         ),
                         const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Confirm Your Password',
                           labelText: 'Confirm Password',
                           isPasswordField: true,
+                          controller: _confirmPasswordController,
                         ),
                         const SizedBox(height: 15),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: MaterialButton(
-                            onPressed: () => print('Signup button pressed !'),
+                            onPressed: () {
+                              _signUp();
+                            },
                             color: EXColors.primaryDark,
                             height: 60,
                             mouseCursor: MaterialStateMouseCursor.clickable,
@@ -254,5 +281,30 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  void _signUp() async {
+    setState(() {
+      isSigningUp = true;
+    });
+
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    setState(() {
+      isSigningUp = false;
+    });
+    if (user != null) {
+      showToast(message: "User is successfully created");
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (route) => false);
+    } else {
+      showToast(message: "Some error happend");
+    }
   }
 }

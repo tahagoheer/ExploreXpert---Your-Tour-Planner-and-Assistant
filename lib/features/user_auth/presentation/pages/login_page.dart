@@ -3,10 +3,31 @@ import 'package:explorexpert/features/user_auth/presentation/pages/home_page.dar
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+import '../../../../global/toast.dart';
+import '../../firebase_auth_implementation/firebase_auth_services.dart';
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  bool _isSigning = false;
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +92,18 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Email',
                           labelText: 'Email',
                           isPasswordField: false,
+                          controller: _emailController,
                         ),
                         const SizedBox(height: 10),
-                        const FormFieldContainerWidget(
+                        FormFieldContainerWidget(
                           hintText: 'Password',
                           labelText: 'Password',
                           isPasswordField: true,
+                          controller: _passwordController,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -112,10 +135,7 @@ class LoginPage extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.50,
                           child: MaterialButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
+                              _signIn();
                             },
                             color: EXColors.primaryDark,
                             height: 60,
@@ -269,5 +289,28 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    setState(() {
+      _isSigning = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigning = false;
+    });
+
+    if (user != null) {
+      showToast(message: "User is successfully signed in");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
+    } else {
+      showToast(message: "some error occured");
+    }
   }
 }

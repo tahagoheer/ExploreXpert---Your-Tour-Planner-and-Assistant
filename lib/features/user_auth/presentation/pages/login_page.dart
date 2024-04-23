@@ -5,6 +5,7 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
@@ -235,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(Icons.g_mobiledata),
+                                  child: Icon(FontAwesomeIcons.google),
                                 ),
                               ),
                             ),

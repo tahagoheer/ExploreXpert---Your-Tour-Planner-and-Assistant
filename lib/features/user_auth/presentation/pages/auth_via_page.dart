@@ -3,6 +3,7 @@ import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
@@ -170,10 +171,11 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                   children: [
                                     Padding(
                                       padding:
-                                          EdgeInsets.only(left: 1, right: 10),
-                                      child: Icon(Icons.g_mobiledata,
-                                          size: 40,
-                                          color: EXColors.secondaryMedium),
+                                          EdgeInsets.only(left: 5, right: 15),
+                                      child: Icon(
+                                        FontAwesomeIcons.google,
+                                        size: 25,
+                                      ),
                                     ),
                                     Text(
                                       'Continue with Google',

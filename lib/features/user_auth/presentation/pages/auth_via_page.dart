@@ -4,6 +4,10 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import '../../../../global/toast.dart';
+import '../../../app/home_page.dart';
 
 class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
@@ -13,7 +17,7 @@ class AuthViaPage extends StatefulWidget {
 }
 
 class _AuthViaPageState extends State<AuthViaPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +164,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.70,
                               child: MaterialButton(
-                                onPressed: _handleGoogleSignIn,
+                                onPressed: _signInWithGoogle,
                                 color: Colors.red,
                                 height: 50,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
@@ -279,12 +283,28 @@ class _AuthViaPageState extends State<AuthViaPage> {
     );
   }
 
-  void _handleGoogleSignIn() {
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
     try {
-      GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
-      _auth.signInWithProvider(_googleAuthProvider);
-    } catch (error) {
-      print(error);
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+    } catch (e) {
+      showToast(message: "some error occured $e");
     }
   }
 }

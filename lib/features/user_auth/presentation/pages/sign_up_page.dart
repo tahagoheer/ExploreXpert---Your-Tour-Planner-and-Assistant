@@ -1,10 +1,11 @@
-import 'package:explorexpert/features/user_auth/presentation/pages/home_page.dart';
+import 'package:explorexpert/features/app/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
@@ -18,6 +19,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -217,11 +219,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               width: 60,
                               child: MaterialButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignUpPage()));
+                                  _signInWithGoogle;
                                 },
                                 color: Colors.red,
                                 height: 60,
@@ -323,6 +321,31 @@ class _SignUpPageState extends State<SignUpPage> {
           (route) => false);
     } else {
       showToast(message: "Some error happend");
+    }
+  }
+
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+    } catch (e) {
+      showToast(message: "some error occured $e");
     }
   }
 }

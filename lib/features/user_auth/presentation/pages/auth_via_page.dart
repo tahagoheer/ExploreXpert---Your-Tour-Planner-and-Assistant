@@ -161,7 +161,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                               width: MediaQuery.of(context).size.width * 0.70,
                               child: MaterialButton(
                                 onPressed: _handleGoogleSignIn,
-                                color: Colors.white,
+                                color: Colors.red,
                                 height: 50,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
@@ -175,12 +175,13 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                       child: Icon(
                                         FontAwesomeIcons.google,
                                         size: 25,
+                                        color: Colors.white,
                                       ),
                                     ),
                                     Text(
                                       'Continue with Google',
                                       style: TextStyle(
-                                        color: EXColors.secondaryMedium,
+                                        color: Colors.white,
                                         fontSize: 17,
                                       ),
                                     ),
@@ -201,7 +202,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: Colors.blueAccent,
                                 height: 50,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
@@ -213,13 +214,12 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                       padding:
                                           EdgeInsets.only(left: 5, right: 15),
                                       child: Icon(Icons.facebook,
-                                          size: 28,
-                                          color: EXColors.secondaryMedium),
+                                          size: 28, color: Colors.white),
                                     ),
                                     Text(
                                       'Continue with Facebook',
                                       style: TextStyle(
-                                        color: EXColors.secondaryMedium,
+                                        color: Colors.white,
                                         fontSize: 17,
                                       ),
                                     ),

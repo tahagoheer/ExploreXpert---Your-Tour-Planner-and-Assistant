@@ -214,7 +214,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -223,19 +223,23 @@ class _SignUpPageState extends State<SignUpPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: Colors.red,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(FontAwesomeIcons.google),
+                                  child: Icon(
+                                    FontAwesomeIcons.google,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(width: 20),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -244,19 +248,23 @@ class _SignUpPageState extends State<SignUpPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: Colors.blueAccent,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(Icons.facebook),
+                                  child: Icon(
+                                    Icons.facebook,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(width: 20),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -265,13 +273,17 @@ class _SignUpPageState extends State<SignUpPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: EXColors.secondaryMedium,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(Icons.apple),
+                                  child: Icon(
+                                    Icons.apple,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),

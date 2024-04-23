@@ -6,6 +6,7 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
@@ -19,6 +20,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -221,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -230,19 +232,23 @@ class _LoginPageState extends State<LoginPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: Colors.red,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(FontAwesomeIcons.google),
+                                  child: Icon(
+                                    FontAwesomeIcons.google,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(width: 20),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -251,19 +257,23 @@ class _LoginPageState extends State<LoginPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: Colors.blueAccent,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(Icons.facebook),
+                                  child: Icon(
+                                    Icons.facebook,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(width: 20),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.15,
+                              width: 60,
                               child: MaterialButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -272,13 +282,17 @@ class _LoginPageState extends State<LoginPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: EXColors.secondaryMedium,
                                 height: 60,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
-                                  child: Icon(Icons.apple),
+                                  child: Icon(
+                                    Icons.apple,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               ),
                             ),
@@ -316,6 +330,30 @@ class _LoginPageState extends State<LoginPage> {
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     } else {
       showToast(message: "some error occured");
+    }
+  }
+
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.pushNamed(context, "/home");
+      }
+    } catch (e) {
+      showToast(message: "some error occured $e");
     }
   }
 }

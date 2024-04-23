@@ -240,7 +240,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                           builder: (context) =>
                                               const SignUpPage()));
                                 },
-                                color: Colors.white,
+                                color: EXColors.secondaryMedium,
                                 height: 50,
                                 mouseCursor: MaterialStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
@@ -252,13 +252,12 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                       padding:
                                           EdgeInsets.only(left: 5, right: 15),
                                       child: Icon(Icons.apple,
-                                          size: 28,
-                                          color: EXColors.secondaryMedium),
+                                          size: 28, color: Colors.white),
                                     ),
                                     Text(
                                       'Continue with Apple',
                                       style: TextStyle(
-                                        color: EXColors.secondaryMedium,
+                                        color: Colors.white,
                                         fontSize: 17,
                                       ),
                                     ),

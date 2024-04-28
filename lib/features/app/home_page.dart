@@ -133,116 +133,28 @@ class _HomePageState extends State<HomePage> {
               const SectionHeading(
                 text: 'Top Rated Rooms',
               ),
-              const SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom2.png',
-                          title: '2 Nmbr Bedroom',
-                          price: 9000,
-                          discount: 10000,
-                          currency: 'PKR',
-                          timespan: 'Day',
-                        ),
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom1.png',
-                          title: 'Trippe Bedroom',
-                          price: 5000,
-                          discount: 6500,
-                          currency: 'PKR',
-                          timespan: 'Night',
-                          provider: 'COMSATS Hotels',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom1.png',
-                          title: 'Trippe Bedroom',
-                          price: 5000,
-                          discount: 6500,
-                          currency: 'PKR',
-                          timespan: 'Night',
-                          provider: 'Taha Goheer',
-                        ),
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom2.png',
-                          title: '2 Nmbr Bedroom',
-                          price: 9000,
-                          discount: 10000,
-                          currency: 'PKR',
-                          timespan: 'Day',
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom2.png',
-                          title: '2 Nmbr Bedroom',
-                          price: 9000,
-                          discount: 10000,
-                          currency: 'PKR',
-                          timespan: 'Day',
-                          provider: 'COMSATS Hotels',
-                        ),
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom1.png',
-                          title: 'Trippe Bedroom',
-                          price: 5000,
-                          discount: 6500,
-                          currency: 'PKR',
-                          timespan: 'Night',
-                          provider: 'Taha Goheer',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom1.png',
-                          title: 'Trippe Bedroom',
-                          price: 5000,
-                          discount: 6500,
-                          currency: 'PKR',
-                          timespan: 'Night',
-                        ),
-                        RoomCard(
-                          thumbnailpath: 'assets/images/allroom2.png',
-                          title: '2 Nmbr Bedroom',
-                          price: 9000,
-                          discount: 10000,
-                          currency: 'PKR',
-                          timespan: 'Day',
-                          provider: 'COMSATS Hotels',
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              GridView.builder(
+              SingleChildScrollView(
+                child: GridView.builder(
                   itemCount: 6,
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 16.0,
-                    crossAxisSpacing: 16.0,
-                    mainAxisExtent: 288,
+                    mainAxisSpacing: 10.0,
+                    crossAxisSpacing: 4.0,
+                    mainAxisExtent: 260,
                   ),
                   itemBuilder: (_, index) => RoomCard(
-                        thumbnailpath: thumbnailpaths[index],
-                        title: titles[index],
-                        provider: providers[index],
-                        currency: currencies[index],
-                        price: prices[index],
-                        timespan: timespans[index],
-                        discount: discounts[index],
-                      )),
+                    thumbnailpath: thumbnailpaths[index],
+                    title: titles[index],
+                    provider: providers[index],
+                    currency: currencies[index],
+                    price: prices[index],
+                    timespan: timespans[index],
+                    discount: discounts[index],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

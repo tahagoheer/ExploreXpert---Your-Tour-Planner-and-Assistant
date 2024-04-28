@@ -1,8 +1,8 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/forgot_password_page.dart';
-import 'package:explorexpert/features/app/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
+import 'package:explorexpert/global/navigation_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -323,8 +323,10 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       showToast(message: "User is successfully signed in");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const NavigationMenu()),
+          (route) => false);
     } else {
       showToast(message: "some error occured");
     }
@@ -347,8 +349,10 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const NavigationMenu()),
+            (route) => false);
       }
     } catch (e) {
       showToast(message: "some error occured $e");

@@ -1,5 +1,9 @@
-import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../user_auth/presentation/widgets/hotel_type_card.dart';
+import '../user_auth/presentation/widgets/places_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +13,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final thumbnailpaths = [
+    'assets/images/allroom2.png',
+    'assets/images/allroom1.png',
+    'assets/images/allroom1.png',
+    'assets/images/allroom2.png',
+    'assets/images/allroom2.png',
+    'assets/images/allroom1.png',
+    'assets/images/allroom1.png',
+    'assets/images/allroom2.png'
+  ];
+  final titles = [
+    '2 Nmbr Bedroom',
+    'Trippe Bedroom',
+    'Trippe Bedroom',
+    '2 Nmbr Bedroom',
+    '2 Nmbr Bedroom',
+    'Trippe Bedroom',
+    'Trippe Bedroom',
+    '2 Nmbr Bedroom'
+  ];
+  final providers = [
+    'ExploreXpert',
+    'COMSATS Hotels',
+    'Taha Goheer',
+    'ExploreXpert',
+    'COMSATS Hotels',
+    'Taha Goheer',
+    'ExploreXpert',
+    'COMSATS Hotels'
+  ];
+  final prices = [9000, 5000, 5000, 9000, 9000, 5000, 5000, 9000];
+  final discounts = [6500, 10000, 10000, 6500, 6500, 10000, 10000, 6500];
+  final currencies = ['PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR'];
+  final timespans = [
+    'Day',
+    'Night',
+    'Night',
+    'Day',
+    'Day',
+    'Night',
+    'Night',
+    'Day'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,959 +77,174 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("All Hotels"),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SingleChildScrollView(
-                    child: Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionHeading(
+                text: 'Places',
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel1.png',
+                      title: 'Islamabad',
+                    ),
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel2.png',
+                      title: 'Lahore',
+                    ),
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel3.png',
+                      title: 'Multan',
+                    ),
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel4.png',
+                      title: 'Faisalabad',
+                    ),
+                  ],
+                ),
+              ),
+              const SectionHeading(
+                text: 'Hotel Types',
+              ),
+              const SingleChildScrollView(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    HotelTypeCard(
+                      thumbnailpath: 'assets/images/5star.png',
+                      type: 5,
+                    ),
+                    HotelTypeCard(
+                      thumbnailpath: 'assets/images/4star.png',
+                      type: 4,
+                    ),
+                    HotelTypeCard(
+                      thumbnailpath: 'assets/images/3star.png',
+                      type: 3,
+                    )
+                  ],
+                ),
+              ),
+              const SectionHeading(
+                text: 'Top Rated Rooms',
+              ),
+              const SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          height: 70,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage("assets/images/allHotel1.png")),
-                          ),
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom2.png',
+                          title: '2 Nmbr Bedroom',
+                          price: 9000,
+                          discount: 10000,
+                          currency: 'PKR',
+                          timespan: 'Day',
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          height: 70,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage("assets/images/allHotel2.png")),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          height: 70,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage("assets/images/allHotel3.png")),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          height: 70,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage("assets/images/allHotel4.png")),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          height: 70,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage("assets/images/allHotel2.png")),
-                          ),
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom1.png',
+                          title: 'Trippe Bedroom',
+                          price: 5000,
+                          discount: 6500,
+                          currency: 'PKR',
+                          timespan: 'Night',
+                          provider: 'COMSATS Hotels',
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const Text("Hotel Type"),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          color: EXColors.primaryLight,
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
+                    Row(
+                      children: [
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom1.png',
+                          title: 'Trippe Bedroom',
+                          price: 5000,
+                          discount: 6500,
+                          currency: 'PKR',
+                          timespan: 'Night',
+                          provider: 'Taha Goheer',
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom2.png',
+                          title: '2 Nmbr Bedroom',
+                          price: 9000,
+                          discount: 10000,
+                          currency: 'PKR',
+                          timespan: 'Day',
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom2.png',
+                          title: '2 Nmbr Bedroom',
+                          price: 9000,
+                          discount: 10000,
+                          currency: 'PKR',
+                          timespan: 'Day',
+                          provider: 'COMSATS Hotels',
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom1.png',
+                          title: 'Trippe Bedroom',
+                          price: 5000,
+                          discount: 6500,
+                          currency: 'PKR',
+                          timespan: 'Night',
+                          provider: 'Taha Goheer',
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom1.png',
+                          title: 'Trippe Bedroom',
+                          price: 5000,
+                          discount: 6500,
+                          currency: 'PKR',
+                          timespan: 'Night',
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
+                        RoomCard(
+                          thumbnailpath: 'assets/images/allroom2.png',
+                          title: '2 Nmbr Bedroom',
+                          price: 9000,
+                          discount: 10000,
+                          currency: 'PKR',
+                          timespan: 'Day',
+                          provider: 'COMSATS Hotels',
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10, bottom: 10),
-                        width: 180,
-                        height: 250,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: EXColors.secondaryDark, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: 175,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          "assets/images/allroom1.png")),
-                                ),
-                              ),
-                              const Text(
-                                'Trippe Bedroom',
-                                style: TextStyle(
-                                    color: EXColors.mainText,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'Starting From',
-                                  style: TextStyle(
-                                      color: EXColors.activeText, fontSize: 12),
-                                ),
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'PKR 5000/Night',
-                                    style: TextStyle(
-                                        color: EXColors.activeText,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    '6500',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.lineThrough,
-                                        color: EXColors.disabledText,
-                                        fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  color: EXColors.specialDark,
-                                  height: 25,
-                                  mouseCursor:
-                                      MaterialStateMouseCursor.clickable,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Book Now',
-                                        style: TextStyle(
-                                            color: EXColors.secondaryLight,
-                                            fontSize: 12,
-                                            letterSpacing: 2,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_circle_right_rounded,
-                                        color: EXColors.specialLight,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 2 - 10,
-              child: Card(
-                color: EXColors.secondaryLight,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 175,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage("assets/images/allroom1.png")),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 5.0),
-                        child: Text(
-                          'Trippe Bedroom',
-                          style: TextStyle(
-                              color: EXColors.mainText,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0),
-                        child: Text(
-                          'Starting From',
-                          style: TextStyle(
-                              color: EXColors.activeText, fontSize: 12),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 5.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'PKR 5000/Night',
-                              style: TextStyle(
-                                  color: EXColors.activeText,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),
-                            Text(
-                              '6500',
-                              style: TextStyle(
-                                  decoration: TextDecoration.lineThrough,
-                                  decorationColor: EXColors.secondaryDark,
-                                  decorationThickness: 1,
-                                  color: EXColors.disabledText,
-                                  fontSize: 11),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 140,
-                        child: MaterialButton(
-                          onPressed: () {},
-                          color: EXColors.specialDark,
-                          height: 25,
-                          mouseCursor: MaterialStateMouseCursor.clickable,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Book Now',
-                                style: TextStyle(
-                                    color: EXColors.secondaryLight,
-                                    fontSize: 12,
-                                    letterSpacing: 2,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Icon(
-                                Icons.arrow_circle_right_rounded,
-                                color: EXColors.specialLight,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            )
-          ],
+              GridView.builder(
+                  itemCount: 6,
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16.0,
+                    crossAxisSpacing: 16.0,
+                    mainAxisExtent: 288,
+                  ),
+                  itemBuilder: (_, index) => RoomCard(
+                        thumbnailpath: thumbnailpaths[index],
+                        title: titles[index],
+                        provider: providers[index],
+                        currency: currencies[index],
+                        price: prices[index],
+                        timespan: timespans[index],
+                        discount: discounts[index],
+                      )),
+            ],
+          ),
         ),
       ),
     );

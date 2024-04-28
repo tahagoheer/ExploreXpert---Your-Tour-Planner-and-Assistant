@@ -73,6 +73,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+<<<<<<< HEAD
   cross_file:
     dependency: transitive
     description:
@@ -81,6 +82,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.4+1"
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -97,6 +100,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+<<<<<<< HEAD
   file_selector_linux:
     dependency: transitive
     description:
@@ -129,6 +133,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+1"
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
   firebase_analytics:
     dependency: "direct main"
     description:
@@ -214,6 +220,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -222,6 +229,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.19"
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -312,6 +321,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+<<<<<<< HEAD
   image_picker:
     dependency: "direct main"
     description:
@@ -376,6 +386,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
   intl:
     dependency: "direct main"
     description:
@@ -440,6 +452,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -448,6 +461,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
   path:
     dependency: transitive
     description:

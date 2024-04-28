@@ -44,8 +44,11 @@ dependencies:
   fluttertoast: ^8.2.5
   font_awesome_flutter: ^10.7.0
   google_sign_in: ^6.2.1
+<<<<<<< HEAD
   
   image_picker: ^0.8.4+4
+=======
+>>>>>>> 0ad9d5624835cb3008e40b0f6b1646b993d43116
 
 dev_dependencies:
   flutter_test:

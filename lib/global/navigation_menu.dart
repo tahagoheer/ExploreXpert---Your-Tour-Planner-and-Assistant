@@ -40,23 +40,23 @@ class _NavigationMenuState extends State<NavigationMenu> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.home_filled),
-              label: 'Home',
+              label: '•',
               activeIcon: Icon(Icons.home_filled)),
           BottomNavigationBarItem(
               icon: Icon(Icons.search_outlined),
-              label: 'Seearch',
+              label: '•',
               activeIcon: Icon(Icons.search)),
           BottomNavigationBarItem(
               icon: Icon(Icons.travel_explore_outlined),
-              label: 'Globe',
+              label: '•',
               activeIcon: Icon(Icons.travel_explore)),
           BottomNavigationBarItem(
               icon: Icon(Icons.chat_outlined),
-              label: 'Chat',
+              label: '•',
               activeIcon: Icon(Icons.chat)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_2_outlined),
-              label: 'Profile',
+              label: '•',
               activeIcon: Icon(Icons.person_2)),
         ],
       ),

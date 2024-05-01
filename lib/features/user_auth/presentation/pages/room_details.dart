@@ -49,9 +49,9 @@ class RoomDetails extends StatelessWidget {
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            separatorBuilder: (_, __) =>
+                            separatorBuilder: (context, index) =>
                                 const SizedBox(width: 16),
-                            itemBuilder: (_, index) => Container(
+                            itemBuilder: (context, index) => Container(
                               width: 80,
                               padding: const EdgeInsets.all(8.0),
                               foregroundDecoration: BoxDecoration(

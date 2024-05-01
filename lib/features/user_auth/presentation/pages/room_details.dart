@@ -12,6 +12,12 @@ class RoomDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        foregroundColor: EXColors.primaryDark,
+        automaticallyImplyLeading: true,
+        leading: const BackButton(),
+        backgroundColor: Colors.white54,
+      ),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -21,16 +27,12 @@ class RoomDetails extends StatelessWidget {
                 /// 1 Product Image Slider
                 Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 35.0),
-                      child: Container(
-                        height: 330,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image:
-                                    AssetImage('assets/images/roomTest.png'))),
-                      ),
+                    Container(
+                      height: 330,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage('assets/images/roomTest.png'))),
                     ),
                     Positioned(
                       right: 0,
@@ -64,11 +66,6 @@ class RoomDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                    AppBar(
-                      automaticallyImplyLeading: true,
-                      leading: const BackButton(),
-                      backgroundColor: Colors.white54,
                     ),
                   ],
                 ),
@@ -377,43 +374,46 @@ class RoomDetails extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-              top: MediaQuery.of(context).size.height - 60,
-              left: 5,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width - 10,
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: EXColors.specialDark,
-                  height: 50,
-                  mouseCursor: MaterialStateMouseCursor.clickable,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Book Now',
-                        style: TextStyle(
-                            color: EXColors.secondaryLight,
-                            fontSize: 22,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Icon(
-                        Icons.arrow_circle_right_rounded,
-                        color: EXColors.specialLight,
-                        size: 35,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        height: 80,
+        surfaceTintColor: EXColors.primaryDark,
+        clipBehavior: Clip.hardEdge,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width - 10,
+          child: MaterialButton(
+            onPressed: () {
+              print('Goto Room Booking Page');
+            },
+            color: EXColors.specialDark,
+            height: 50,
+            mouseCursor: MaterialStateMouseCursor.clickable,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Book Now',
+                  style: TextStyle(
+                      color: EXColors.secondaryLight,
+                      fontSize: 22,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Icon(
+                  Icons.arrow_circle_right_rounded,
+                  color: EXColors.specialLight,
+                  size: 35,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -1,7 +1,7 @@
-import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
+
 import '../user_auth/presentation/widgets/hotel_type_card.dart';
 import '../user_auth/presentation/widgets/places_card.dart';
 

@@ -1,3 +1,4 @@
+import 'package:explorexpert/features/user_auth/presentation/pages/room_details.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,12 @@ class RoomCard extends StatelessWidget {
               SizedBox(
                 width: 140,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RoomDetails()));
+                  },
                   color: EXColors.specialDark,
                   height: 25,
                   mouseCursor: MaterialStateMouseCursor.clickable,

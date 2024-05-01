@@ -28,7 +28,10 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlue,
+        selectedLabelStyle: const TextStyle(
+          fontSize: 14,
+        ),
+        backgroundColor: EXColors.primaryDark,
         selectedItemColor: EXColors.primaryDark,
         unselectedItemColor: Colors.black,
         currentIndex: currentPage,
@@ -47,9 +50,12 @@ class _NavigationMenuState extends State<NavigationMenu> {
               label: '•',
               activeIcon: Icon(Icons.search)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.travel_explore_outlined),
-              label: '•',
-              activeIcon: Icon(Icons.travel_explore)),
+            icon: ImageIcon(
+                AssetImage('assets/images/ExploreXpertIconSecondary.png')),
+            label: '•',
+            activeIcon: ImageIcon(
+                AssetImage('assets/images/ExploreXpertIconSecondary.png')),
+          ),
           BottomNavigationBarItem(
               icon: Icon(Icons.chat_outlined),
               label: '•',

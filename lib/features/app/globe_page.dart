@@ -17,7 +17,7 @@ class _GlobePageState extends State<GlobePage> {
   List profile = [
     'assets/images/userprofile2.JPEG',
     'assets/images/userprofile1.png',
-    'assets/images/userprofile3.jpeg',
+    'assets/images/userprofile3.png',
   ];
   List postimage = [
     'assets/images/post_1.png',

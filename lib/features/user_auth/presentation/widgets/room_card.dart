@@ -1,4 +1,4 @@
-import 'package:explorexpert/features/user_auth/presentation/pages/room_details.dart';
+import 'package:explorexpert/features/user_auth/presentation/pages/room_details_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,7 @@ class RoomCard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RoomDetails()));
+                            builder: (context) => const RoomDetailsPage()));
                   },
                   color: EXColors.specialDark,
                   height: 25,

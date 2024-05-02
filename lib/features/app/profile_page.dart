@@ -1,4 +1,7 @@
+import 'package:explorexpert/features/user_auth/presentation/widgets/badges_grid.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/destinations_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/posts_grid.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/visited_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -143,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                   physics: AlwaysScrollableScrollPhysics(),
                   children: [
@@ -151,9 +154,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: EdgeInsets.all(5.0),
                       child: PostsGrid(),
                     ),
-                    Center(child: Text('2')),
-                    Center(child: Text('3')),
-                    Center(child: Text('4')),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: BadgesGrid(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: VisitedGrid(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: DestinationsGrid(),
+                    ),
                   ]),
             )
           ],

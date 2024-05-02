@@ -1,13 +1,10 @@
+import 'package:explorexpert/features/user_auth/presentation/pages/room_booking_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-
 import '../widgets/essentials.dart';
 
-class RoomDetails extends StatelessWidget {
-  const RoomDetails({super.key});
+class RoomDetailsPage extends StatelessWidget {
+  const RoomDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -385,7 +382,11 @@ class RoomDetails extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 10,
           child: MaterialButton(
             onPressed: () {
-              print('Goto Room Booking Page');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RoomBookingPage()),
+              );
             },
             color: EXColors.specialDark,
             height: 50,

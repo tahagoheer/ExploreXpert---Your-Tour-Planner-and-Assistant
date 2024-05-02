@@ -57,9 +57,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 AssetImage('assets/images/ExploreXpertIconSecondary.png')),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_outlined),
+              icon: Icon(Icons.notifications_active_outlined),
               label: '•',
-              activeIcon: Icon(Icons.chat)),
+              activeIcon: Icon(Icons.notifications_active_rounded)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_2_outlined),
               label: '•',

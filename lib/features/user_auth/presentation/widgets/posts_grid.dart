@@ -40,7 +40,6 @@ class _PostsGridState extends State<PostsGrid> {
       ),
       itemBuilder: (context, index) => Container(
         foregroundDecoration: BoxDecoration(
-            color: Colors.red,
             image: DecorationImage(image: AssetImage(thumbnailpaths[index]))),
       ),
     );

@@ -25,7 +25,7 @@ class MustVisitPlaces extends StatelessWidget {
           ),
           margin: const EdgeInsets.only(right: 10),
           height: 160,
-          width: 110,
+          width: 120,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: Colors.white,

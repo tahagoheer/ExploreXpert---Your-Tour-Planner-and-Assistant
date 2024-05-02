@@ -11,6 +11,7 @@ class GlobePage extends StatefulWidget {
 
 class _GlobePageState extends State<GlobePage> {
   bool isLiked = false;
+  bool isSaved = false;
   int likeCount = 59;
   int commentCount = 420;
   List name = ['Taha Ahmad', 'Muhammad Taha', 'Goheer59ya'];
@@ -158,7 +159,22 @@ class _GlobePageState extends State<GlobePage> {
                         )
                       ],
                     ),
-                    const Icon(Icons.save_alt_rounded),
+                    IconButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        if (isSaved == false) {
+                          isSaved = !isSaved;
+                        } else {
+                          isSaved = !isSaved;
+                        }
+                      },
+                      icon: isSaved == true
+                          ? const Icon(
+                              Icons.bookmark,
+                              color: EXColors.primaryDark,
+                            )
+                          : const Icon(Icons.bookmark_border),
+                    ),
                   ],
                 ),
               ),

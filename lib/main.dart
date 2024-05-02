@@ -5,8 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
-import 'global/navigation_menu.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(
-        child: NavigationMenu(),
+        child: AuthViaPage(),
       ),
     );
   }

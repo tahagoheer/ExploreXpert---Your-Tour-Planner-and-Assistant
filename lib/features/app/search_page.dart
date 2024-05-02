@@ -5,7 +5,6 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/top_attract
 import 'package:explorexpert/features/user_auth/presentation/widgets/travel_guides_card.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/travel_theme_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import '../user_auth/presentation/widgets/search_section_heading.dart';
 
 class SearchPage extends StatelessWidget {

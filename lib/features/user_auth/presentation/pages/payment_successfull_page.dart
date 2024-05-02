@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class PaymentSuccessfullPage extends StatelessWidget {
   const PaymentSuccessfullPage({super.key});
@@ -26,7 +25,7 @@ class PaymentSuccessfullPage extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height - 90,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage('assets/images/paymentsuccessfullbg.png'))),

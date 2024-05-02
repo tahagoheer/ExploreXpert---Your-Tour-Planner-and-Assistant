@@ -4,7 +4,6 @@ import 'package:explorexpert/features/app/home_page.dart';
 import 'package:explorexpert/features/app/profile_page.dart';
 import 'package:explorexpert/features/app/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../features/user_auth/presentation/widgets/essentials.dart';
 

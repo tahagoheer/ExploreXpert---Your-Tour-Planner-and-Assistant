@@ -3,8 +3,6 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/destination
 import 'package:explorexpert/features/user_auth/presentation/widgets/posts_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/visited_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../user_auth/presentation/widgets/essentials.dart';
@@ -88,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '$name',
+                                    name,
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 22,
@@ -148,22 +146,22 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Expanded(
               child: TabBarView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(5.0),
                       child: PostsGrid(),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(5.0),
                       child: BadgesGrid(),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: VisitedGrid(),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: DestinationsGrid(),
                     ),
                   ]),

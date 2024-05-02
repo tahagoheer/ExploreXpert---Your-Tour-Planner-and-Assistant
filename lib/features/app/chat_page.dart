@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -23,7 +22,7 @@ class ChatPage extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
+      body: const Center(
           child: Text(
         'No notifications yet \n🙃🔕❤️‍🩹',
         textAlign: TextAlign.center,

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'essentials.dart';
 
@@ -78,7 +76,7 @@ class PackagesCard extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(left: 7, top: 5),
+          padding: const EdgeInsets.only(left: 7, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -108,12 +106,12 @@ class PackagesCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
-                  Text(
+                  const Text(
                     'onwards',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: EXColors.disabledText,
                       fontSize: 9,
                       fontWeight: FontWeight.w500,

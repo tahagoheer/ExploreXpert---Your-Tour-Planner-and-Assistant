@@ -69,7 +69,7 @@ class RoomBookingPage extends StatelessWidget {
                       image: AssetImage('assets/images/CreditCard.png'))),
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 80,
@@ -77,8 +77,8 @@ class RoomBookingPage extends StatelessWidget {
                     color: EXColors.primaryDark,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(width: 1, color: EXColors.primaryDark)),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

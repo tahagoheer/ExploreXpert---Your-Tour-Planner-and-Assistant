@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:explorexpert/features/app/pages/onboarding/onboarding_screen.dart';
 import 'package:explorexpert/features/app/pages/splash_screen.dart';
-import 'package:explorexpert/features/user_auth/presentation/pages/auth_via_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(
-        child: AuthViaPage(),
+        child: OnBoardingScreen(),
       ),
     );
   }

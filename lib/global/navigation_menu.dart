@@ -1,8 +1,8 @@
-import 'package:explorexpert/features/app/pages/chat_page.dart';
-import 'package:explorexpert/features/app/pages/globe_page.dart';
-import 'package:explorexpert/features/app/pages/home_page.dart';
-import 'package:explorexpert/features/app/pages/profile_page.dart';
-import 'package:explorexpert/features/app/pages/search_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/chat_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/globe_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/home_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/profile_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/search_page.dart';
 import 'package:flutter/material.dart';
 
 import '../features/user_auth/presentation/widgets/essentials.dart';

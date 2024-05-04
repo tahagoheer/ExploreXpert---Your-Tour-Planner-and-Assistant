@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../user_auth/presentation/widgets/essentials.dart';
+import '../../../user_auth/presentation/widgets/essentials.dart';
 
 class GlobePage extends StatefulWidget {
   const GlobePage({super.key});

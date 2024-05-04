@@ -2,8 +2,8 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.d
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
 
-import '../../user_auth/presentation/widgets/hotel_type_card.dart';
-import '../../user_auth/presentation/widgets/places_card.dart';
+import '../../../user_auth/presentation/widgets/hotel_type_card.dart';
+import '../../../user_auth/presentation/widgets/places_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

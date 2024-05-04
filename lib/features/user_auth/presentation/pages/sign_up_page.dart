@@ -1,4 +1,4 @@
-import 'package:explorexpert/features/app/pages/home_page.dart';
+import 'package:explorexpert/features/app/pages/navigation/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
@@ -330,11 +330,11 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   _signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    final GoogleSignIn googleSignIn = GoogleSignIn();
 
     try {
       final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+          await googleSignIn.signIn();
 
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =

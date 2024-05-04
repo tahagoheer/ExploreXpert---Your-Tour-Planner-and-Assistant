@@ -5,7 +5,7 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/visited_gri
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../user_auth/presentation/widgets/essentials.dart';
+import '../../../user_auth/presentation/widgets/essentials.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

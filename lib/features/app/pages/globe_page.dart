@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../user_auth/presentation/widgets/essentials.dart';
+import '../../user_auth/presentation/widgets/essentials.dart';
 
 class GlobePage extends StatefulWidget {
   const GlobePage({super.key});
@@ -120,6 +120,7 @@ class _GlobePageState extends State<GlobePage> {
                 padding: const EdgeInsets.only(right: 18.0, left: 5, bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
@@ -129,13 +130,15 @@ class _GlobePageState extends State<GlobePage> {
                             IconButton(
                               padding: const EdgeInsets.all(0),
                               onPressed: () {
-                                if (isLiked == false) {
-                                  isLiked = !isLiked;
-                                  likeCount += 1;
-                                } else {
-                                  isLiked = !isLiked;
-                                  likeCount -= 1;
-                                }
+                                setState(() {
+                                  if (isLiked == false) {
+                                    isLiked = !isLiked;
+                                    likeCount += 1;
+                                  } else {
+                                    isLiked = !isLiked;
+                                    likeCount -= 1;
+                                  }
+                                });
                               },
                               icon: isLiked == true
                                   ? const Icon(
@@ -162,18 +165,22 @@ class _GlobePageState extends State<GlobePage> {
                     IconButton(
                       padding: const EdgeInsets.all(0),
                       onPressed: () {
-                        if (isSaved == false) {
-                          isSaved = !isSaved;
-                        } else {
-                          isSaved = !isSaved;
-                        }
+                        setState(() {
+                          if (isSaved == false) {
+                            isSaved = !isSaved;
+                          } else {
+                            isSaved = !isSaved;
+                          }
+                        });
                       },
                       icon: isSaved == true
                           ? const Icon(
                               Icons.bookmark,
                               color: EXColors.primaryDark,
                             )
-                          : const Icon(Icons.bookmark_border),
+                          : const Icon(
+                              Icons.bookmark_border,
+                            ),
                     ),
                   ],
                 ),

@@ -36,8 +36,8 @@ class RoomBookingPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width - 25,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                child: const Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,7 +118,7 @@ class RoomBookingPage extends StatelessWidget {
             },
             color: EXColors.specialDark,
             height: 50,
-            mouseCursor: MaterialStateMouseCursor.clickable,
+            mouseCursor: WidgetStateMouseCursor.clickable,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: const Row(

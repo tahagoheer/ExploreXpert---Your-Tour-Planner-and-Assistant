@@ -1,13 +1,12 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/global/navigation_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../../../global/toast.dart';
-import '../../../app/home_page.dart';
 
 class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
@@ -82,7 +81,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                 },
                                 color: Colors.white,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: const Center(
@@ -108,7 +107,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                 },
                                 color: EXColors.primaryDark,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: const Center(
@@ -167,7 +166,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                 onPressed: _signInWithGoogle,
                                 color: Colors.red,
                                 height: 50,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: const Center(
@@ -208,7 +207,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                 },
                                 color: Colors.blueAccent,
                                 height: 50,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: const Center(
@@ -246,7 +245,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
                                 },
                                 color: EXColors.secondaryMedium,
                                 height: 50,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: const Center(
@@ -300,8 +299,8 @@ class _AuthViaPageState extends State<AuthViaPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const NavigationMenu()));
       }
     } catch (e) {
       showToast(message: "some error occured $e");

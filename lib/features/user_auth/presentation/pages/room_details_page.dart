@@ -389,7 +389,7 @@ class RoomDetailsPage extends StatelessWidget {
             },
             color: EXColors.specialDark,
             height: 50,
-            mouseCursor: MaterialStateMouseCursor.clickable,
+            mouseCursor: WidgetStateMouseCursor.clickable,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: const Row(

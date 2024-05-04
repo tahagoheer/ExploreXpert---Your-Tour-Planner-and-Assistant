@@ -1,7 +1,8 @@
-import 'package:explorexpert/features/app/home_page.dart';
+import 'package:explorexpert/features/app/pages/home_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
+import 'package:explorexpert/global/navigation_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -136,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             color: EXColors.primaryDark,
                             height: 60,
-                            mouseCursor: MaterialStateMouseCursor.clickable,
+                            mouseCursor: WidgetStateMouseCursor.clickable,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: Center(
@@ -224,7 +225,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 },
                                 color: Colors.red,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
@@ -249,7 +250,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 },
                                 color: Colors.blueAccent,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
@@ -274,7 +275,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 },
                                 color: EXColors.secondaryMedium,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
@@ -301,26 +302,30 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _signUp() async {
-    setState(() {
-      isSigningUp = true;
-    });
-
     String email = _emailController.text;
     String password = _passwordController.text;
+    String confirmPassword = _confirmPasswordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    if (password == confirmPassword) {
+      setState(() {
+        isSigningUp = true;
+      });
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-    setState(() {
-      isSigningUp = false;
-    });
-    if (user != null) {
-      showToast(message: "User is successfully created");
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-          (route) => false);
+      setState(() {
+        isSigningUp = false;
+      });
+      if (user != null) {
+        showToast(message: "User is successfully created");
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (route) => false);
+      } else {
+        showToast(message: "Some error happend");
+      }
     } else {
-      showToast(message: "Some error happend");
+      showToast(message: "Password and Confirm Password doesn't match.");
     }
   }
 
@@ -341,11 +346,11 @@ class _SignUpPageState extends State<SignUpPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const NavigationMenu()));
       }
     } catch (e) {
-      showToast(message: "some error occured $e");
+      showToast(message: "An error occurred: $e");
     }
   }
 }

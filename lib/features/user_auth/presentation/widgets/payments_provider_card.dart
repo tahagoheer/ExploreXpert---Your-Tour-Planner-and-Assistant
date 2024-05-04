@@ -4,7 +4,7 @@ import 'essentials.dart';
 
 class PaymentsProviderCard extends StatelessWidget {
   final String thumbnailpath;
-  PaymentsProviderCard({
+  const PaymentsProviderCard({
     super.key,
     required this.thumbnailpath,
   });

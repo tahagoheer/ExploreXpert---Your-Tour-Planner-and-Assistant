@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             color: EXColors.primaryDark,
                             height: 60,
-                            mouseCursor: MaterialStateMouseCursor.clickable,
+                            mouseCursor: WidgetStateMouseCursor.clickable,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: Center(
@@ -231,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 color: Colors.red,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
@@ -256,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 color: Colors.blueAccent,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(
@@ -281,7 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 color: EXColors.secondaryMedium,
                                 height: 60,
-                                mouseCursor: MaterialStateMouseCursor.clickable,
+                                mouseCursor: WidgetStateMouseCursor.clickable,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 child: const Center(

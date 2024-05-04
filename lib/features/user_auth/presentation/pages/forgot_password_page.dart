@@ -89,7 +89,7 @@ class ForgotPasswordPage extends StatelessWidget {
                             },
                             color: EXColors.primaryDark,
                             height: 60,
-                            mouseCursor: MaterialStateMouseCursor.clickable,
+                            mouseCursor: WidgetStateMouseCursor.clickable,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: const Center(

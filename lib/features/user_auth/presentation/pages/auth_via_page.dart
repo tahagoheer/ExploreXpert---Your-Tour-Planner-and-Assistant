@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../global/toast.dart';
+import '../../firebase_auth_implementation/save_user_google.dart';
 
 class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
@@ -299,6 +300,7 @@ class _AuthViaPageState extends State<AuthViaPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
+        await saveUserGoogle(googleSignInAccount);
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const NavigationMenu()));
       }

@@ -10,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
+import '../../firebase_auth_implementation/save_user_google.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -349,6 +350,7 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
+        await saveUserGoogle(googleSignInAccount);
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const NavigationMenu()),

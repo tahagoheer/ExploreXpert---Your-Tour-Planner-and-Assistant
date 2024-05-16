@@ -1,3 +1,4 @@
+import 'package:explorexpert/features/app/pages/navigation/nav_widgets/ex_appbar.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
@@ -59,22 +60,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          'assets/images/ExploreXpertTitleAppBar.png',
-          height: 25,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/userprofile1.png'),
-              radius: 25,
-            ),
-          )
-        ],
-      ),
+      appBar: const EXAppBar(),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(

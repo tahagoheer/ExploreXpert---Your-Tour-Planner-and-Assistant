@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/onboarding/onboarding_screen.dart';
 import 'package:explorexpert/features/app/pages/splash_screen.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/global/navigation_menu.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,33 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var auth = FirebaseAuth.instance;
+  bool isLoggedIn = false;
+
+  checkIfSignedIn() async {
+    auth.authStateChanges().listen((User? user) {
+      if (user != null && mounted) {
+        setState(() {
+          isLoggedIn = true;
+          print('logged in $isLoggedIn');
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    checkIfSignedIn();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +55,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: EXColors.primaryDark),
         useMaterial3: true,
       ),
-      home: const SplashScreen(
-        child: OnBoardingScreen(),
+      home: SplashScreen(
+        child: isLoggedIn ? const OnBoardingScreen() : const NavigationMenu(),
       ),
     );
   }

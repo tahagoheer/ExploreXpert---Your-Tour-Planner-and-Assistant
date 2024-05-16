@@ -6,30 +6,16 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/travel_guid
 import 'package:explorexpert/features/user_auth/presentation/widgets/travel_theme_card.dart';
 import 'package:flutter/material.dart';
 import '../../../user_auth/presentation/widgets/search_section_heading.dart';
+import 'nav_widgets/ex_appbar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            'assets/images/ExploreXpertTitleAppBar.png',
-            height: 25,
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/userprofile1.png'),
-                radius: 25,
-              ),
-            )
-          ],
-        ),
-        body: const SingleChildScrollView(
+    return const Scaffold(
+        appBar: EXAppBar(),
+        body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../user_auth/presentation/widgets/essentials.dart';
+import 'nav_widgets/ex_appbar.dart';
 
 class GlobePage extends StatefulWidget {
   const GlobePage({super.key});
@@ -39,22 +40,7 @@ class _GlobePageState extends State<GlobePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          'assets/images/ExploreXpertTitleAppBar.png',
-          height: 25,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/userprofile1.png'),
-              radius: 25,
-            ),
-          )
-        ],
-      ),
+      appBar: const EXAppBar(),
       body: ListView.builder(
         itemCount: caption.length,
         shrinkWrap: true,

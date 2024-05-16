@@ -27,6 +27,5 @@ class EXAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(56);
+  Size get preferredSize => const Size.fromHeight(56);
 }

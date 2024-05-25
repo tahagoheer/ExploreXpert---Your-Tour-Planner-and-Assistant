@@ -1,4 +1,3 @@
-import 'package:explorexpert/features/app/pages/navigation/nav_widgets/ex_appbar.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +59,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const EXAppBar(),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.deepPurple,
+          child: ListView(
+            children: [
+              MaterialButton(
+                onPressed: () {},
+                child: const Text('Logout'),
+              )
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(

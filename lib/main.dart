@@ -34,7 +34,6 @@ class _MyAppState extends State<MyApp> {
       if (user != null && mounted) {
         setState(() {
           isLoggedIn = true;
-          print('logged in $isLoggedIn');
         });
       }
     });
@@ -56,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: SplashScreen(
-        child: isLoggedIn ? const OnBoardingScreen() : const NavigationMenu(),
+        child: isLoggedIn ? const NavigationMenu() : const OnBoardingScreen(),
       ),
     );
   }

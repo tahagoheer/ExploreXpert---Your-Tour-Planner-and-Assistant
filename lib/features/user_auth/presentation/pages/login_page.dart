@@ -227,9 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               width: 60,
                               child: MaterialButton(
-                                onPressed: () {
-                                  _signInWithGoogle;
-                                },
+                                onPressed: _signInWithGoogle,
                                 color: Colors.red,
                                 height: 60,
                                 mouseCursor: WidgetStateMouseCursor.clickable,

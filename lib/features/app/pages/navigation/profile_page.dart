@@ -1,4 +1,3 @@
-import 'package:explorexpert/features/app/pages/profile_setup/profile_info.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/badges_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/destinations_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/posts_grid.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../user_auth/presentation/widgets/essentials.dart';
+import '../profile/profile_edit.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProfileInfo()));
+                                    builder: (context) => const EditProfile()));
                           },
                           icon: const Icon(FontAwesomeIcons.penToSquare),
                         )

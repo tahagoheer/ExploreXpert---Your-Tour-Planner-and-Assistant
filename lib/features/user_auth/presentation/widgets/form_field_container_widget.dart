@@ -83,22 +83,25 @@ class FormFieldContainerWidgetState extends State<FormFieldContainerWidget> {
             hintText: widget.hintText,
             filled: true,
             hintStyle: const TextStyle(color: Colors.black45),
-            suffixIcon: IconButton(
-              onPressed: () {
-                setState(() {
-                  isObscureText = !isObscureText;
-                });
-              },
-              icon: widget.isPasswordField == true
-                  ? Icon(
+            suffixIcon: widget.isPasswordField == true
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscureText = !isObscureText;
+                      });
+                    },
+                    icon: Icon(
                       isObscureText ? Icons.visibility_off : Icons.visibility,
                       color: isObscureText == false
                           ? EXColors.primaryDark
                           : Colors.grey,
-                    )
-                  : const Text(""),
-            ),
+                    ),
+                  )
+                : null,
           ),
+          onTapOutside: (event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../profile/profile_management_home.dart';
+
 class EXAppBar extends StatelessWidget implements PreferredSizeWidget {
   const EXAppBar({
     super.key,
@@ -15,7 +17,12 @@ class EXAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ProfileManagement()));
+          },
           icon: const CircleAvatar(
             backgroundImage: AssetImage('assets/images/userprofile1.png'),
             radius: 25,

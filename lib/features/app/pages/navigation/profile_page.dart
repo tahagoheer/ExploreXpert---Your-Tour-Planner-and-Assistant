@@ -1,3 +1,4 @@
+import 'package:explorexpert/features/app/pages/profile_setup/profile_info.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/badges_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/destinations_grid.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/posts_grid.dart';
@@ -95,7 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfileInfo()));
+                          },
                           icon: const Icon(FontAwesomeIcons.penToSquare),
                         )
                       ],

@@ -322,6 +322,7 @@ class _SignUpPageState extends State<SignUpPage> {
             .set({
           "email": user.email,
           "username": username,
+          "profilepic": "null",
           "provider": "Email",
         });
         showToast(message: "User is successfully created");

@@ -94,8 +94,8 @@ class _ProfileManagementState extends State<ProfileManagement> {
                   onPress: () {},
                 ),
                 ProfileMenu(
-                  title: 'User Management',
-                  icon: Icons.person_sharp,
+                  title: 'Travel History',
+                  icon: Icons.history,
                   onPress: () {},
                 ),
                 const Padding(

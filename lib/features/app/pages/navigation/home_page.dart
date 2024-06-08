@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:explorexpert/features/app/pages/navigation/results/places/places_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
-import 'package:explorexpert/features/user_auth/presentation/widgets/room_card_horizontal.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
 

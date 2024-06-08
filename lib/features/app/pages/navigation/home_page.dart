@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:explorexpert/features/app/pages/navigation/results/places/places_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card_horizontal.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
@@ -40,37 +41,29 @@ class _HomePageState extends State<HomePage> {
               const SectionHeading(
                 text: 'Places',
               ),
-              SingleChildScrollView(
+              const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    GestureDetector(
-                      child: const PlacesCard(
-                        thumbnailpath: 'assets/images/allHotel1.png',
-                        title: 'Islamabad',
-                      ),
-                      onTap: () {},
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel1.png',
+                      title: 'Islamabad',
+                      query_city: 'islamabad',
                     ),
-                    GestureDetector(
-                      child: const PlacesCard(
-                        thumbnailpath: 'assets/images/allHotel2.png',
-                        title: 'Lahore',
-                      ),
-                      onTap: () {},
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel2.png',
+                      title: 'Lahore',
+                      query_city: 'lahore',
                     ),
-                    GestureDetector(
-                      child: const PlacesCard(
-                        thumbnailpath: 'assets/images/allHotel3.png',
-                        title: 'Multan',
-                      ),
-                      onTap: () {},
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel3.png',
+                      title: 'Multan',
+                      query_city: 'multan',
                     ),
-                    GestureDetector(
-                      child: const PlacesCard(
-                        thumbnailpath: 'assets/images/allHotel4.png',
-                        title: 'Faisalabad',
-                      ),
-                      onTap: () {},
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/allHotel4.png',
+                      title: 'Faisalabad',
+                      query_city: 'faisalabad',
                     ),
                   ],
                 ),
@@ -133,46 +126,6 @@ class _HomePageState extends State<HomePage> {
                         int roomOriginalPrice = data['rent'];
                         String roomTimespan = data['timespan'];
                         return RoomCard(
-                          thumbnailpath: thumbnailpaths[index],
-                          title: roomTitle,
-                          provider: roomProvider,
-                          discountedPrice: roomDiscountedPrice,
-                          timespan: roomTimespan,
-                          originalPrice: roomOriginalPrice,
-                          roomId: documentId,
-                        );
-                      });
-                },
-              ),
-              const SectionHeading(
-                text: 'Horizontal Room Card',
-              ),
-              StreamBuilder<QuerySnapshot>(
-                stream: firestoreService.getRoomsStream(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                        child:
-                            const Center(child: CircularProgressIndicator()));
-                  }
-                  List roomsList = snapshot.data!.docs;
-                  return ListView.builder(
-                      itemCount: roomsList.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot document = roomsList[index];
-                        Map<String, dynamic> data =
-                            document.data() as Map<String, dynamic>;
-                        String documentId = document.id;
-                        String roomTitle = data['title'];
-                        String roomProvider = data['provider'];
-                        int roomDiscountedPrice =
-                            (data['rent'] - data['discount']);
-                        int roomOriginalPrice = data['rent'];
-                        String roomTimespan = data['timespan'];
-                        return RoomCardHorizontal(
                           thumbnailpath: thumbnailpaths[index],
                           title: roomTitle,
                           provider: roomProvider,

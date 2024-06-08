@@ -38,10 +38,17 @@ class _ChatPageState extends State<ChatPage> {
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image(
-                                  image: NetworkImage(userPic, scale: 0.5)))
+                                image: NetworkImage(
+                                  userPic,
+                                  scale: 0.5,
+                                ),
+                                fit: BoxFit.fill,
+                              ))
                           : Icon(FontAwesomeIcons.circleUser),
                     ),
                     title: Text(userEmail),
+                    subtitle: Text(
+                        data['name'] != null ? data['name'] : data['username']),
                     trailing: Text(userProvider),
                   );
                 },

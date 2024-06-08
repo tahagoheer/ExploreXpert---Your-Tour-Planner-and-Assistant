@@ -37,10 +37,23 @@ class _ProfileManagementState extends State<ProfileManagement> {
                     SizedBox(
                       height: 120,
                       width: 120,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: const Image(
-                          image: AssetImage('assets/images/userprofile1.png'),
+                      child: Container(
+                        width: 100 * 2 + 5 * 2,
+                        height: 100 * 2 + 5 * 2,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: EXColors.primaryDark, // The color of the ring
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: const Image(
+                              image:
+                                  AssetImage('assets/images/userprofile1.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -56,7 +69,7 @@ class _ProfileManagementState extends State<ProfileManagement> {
                         ),
                         child: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.edit,
+                            icon: const Icon(Icons.edit,
                                 size: 20.0, color: EXColors.primaryDark)),
                       ),
                     ),
@@ -84,8 +97,10 @@ class _ProfileManagementState extends State<ProfileManagement> {
                   title: 'Personal Info',
                   icon: Icons.settings,
                   onPress: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfile()));
                   },
                 ),
                 ProfileMenu(

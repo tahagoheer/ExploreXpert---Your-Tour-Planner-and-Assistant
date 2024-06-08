@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.dart';
+import 'package:explorexpert/features/user_auth/presentation/widgets/room_card_horizontal.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
 
+import '../../../user_auth/presentation/utilities/get_rooms.dart';
 import '../../../user_auth/presentation/widgets/hotel_type_card.dart';
 import '../../../user_auth/presentation/widgets/places_card.dart';
 
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FireStoreService firestoreService = FireStoreService();
   final thumbnailpaths = [
     'assets/images/allroom2.png',
     'assets/images/allroom1.png',
@@ -23,55 +27,9 @@ class _HomePageState extends State<HomePage> {
     'assets/images/allroom1.png',
     'assets/images/allroom2.png'
   ];
-  final titles = [
-    '2 Nmbr Bedroom',
-    'Trippe Bedroom',
-    'Trippe Bedroom',
-    '2 Nmbr Bedroom',
-    '2 Nmbr Bedroom',
-    'Trippe Bedroom',
-    'Trippe Bedroom',
-    '2 Nmbr Bedroom'
-  ];
-  final providers = [
-    'ExploreXpert',
-    'COMSATS Hotels',
-    'Taha Goheer',
-    'ExploreXpert',
-    'COMSATS Hotels',
-    'Taha Goheer',
-    'ExploreXpert',
-    'COMSATS Hotels'
-  ];
-  final prices = [9000, 5000, 5000, 9000, 9000, 5000, 5000, 9000];
-  final discounts = [6500, 10000, 10000, 6500, 6500, 10000, 10000, 6500];
-  final currencies = ['PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR', 'PKR'];
-  final timespans = [
-    'Day',
-    'Night',
-    'Night',
-    'Day',
-    'Day',
-    'Night',
-    'Night',
-    'Day'
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Container(
-          color: Colors.deepPurple,
-          child: ListView(
-            children: [
-              MaterialButton(
-                onPressed: () {},
-                child: const Text('Logout'),
-              )
-            ],
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
@@ -82,25 +40,37 @@ class _HomePageState extends State<HomePage> {
               const SectionHeading(
                 text: 'Places',
               ),
-              const SingleChildScrollView(
+              SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    PlacesCard(
-                      thumbnailpath: 'assets/images/allHotel1.png',
-                      title: 'Islamabad',
+                    GestureDetector(
+                      child: const PlacesCard(
+                        thumbnailpath: 'assets/images/allHotel1.png',
+                        title: 'Islamabad',
+                      ),
+                      onTap: () {},
                     ),
-                    PlacesCard(
-                      thumbnailpath: 'assets/images/allHotel2.png',
-                      title: 'Lahore',
+                    GestureDetector(
+                      child: const PlacesCard(
+                        thumbnailpath: 'assets/images/allHotel2.png',
+                        title: 'Lahore',
+                      ),
+                      onTap: () {},
                     ),
-                    PlacesCard(
-                      thumbnailpath: 'assets/images/allHotel3.png',
-                      title: 'Multan',
+                    GestureDetector(
+                      child: const PlacesCard(
+                        thumbnailpath: 'assets/images/allHotel3.png',
+                        title: 'Multan',
+                      ),
+                      onTap: () {},
                     ),
-                    PlacesCard(
-                      thumbnailpath: 'assets/images/allHotel4.png',
-                      title: 'Faisalabad',
+                    GestureDetector(
+                      child: const PlacesCard(
+                        thumbnailpath: 'assets/images/allHotel4.png',
+                        title: 'Faisalabad',
+                      ),
+                      onTap: () {},
                     ),
                   ],
                 ),
@@ -130,27 +100,89 @@ class _HomePageState extends State<HomePage> {
               const SectionHeading(
                 text: 'Top Rated Rooms',
               ),
-              SingleChildScrollView(
-                child: GridView.builder(
-                  itemCount: 6,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10.0,
-                    crossAxisSpacing: 4.0,
-                    mainAxisExtent: 260,
-                  ),
-                  itemBuilder: (_, index) => RoomCard(
-                    thumbnailpath: thumbnailpaths[index],
-                    title: titles[index],
-                    provider: providers[index],
-                    currency: currencies[index],
-                    price: prices[index],
-                    timespan: timespans[index],
-                    discount: discounts[index],
-                  ),
-                ),
+              StreamBuilder<QuerySnapshot>(
+                stream: firestoreService.getRoomsStream(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return SizedBox(
+                        height: MediaQuery.of(context).size.height / 2,
+                        child:
+                            const Center(child: CircularProgressIndicator()));
+                  }
+                  List roomsList = snapshot.data!.docs;
+                  return GridView.builder(
+                      itemCount: roomsList.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10.0,
+                        crossAxisSpacing: 4.0,
+                        mainAxisExtent: 260,
+                      ),
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot document = roomsList[index];
+                        Map<String, dynamic> data =
+                            document.data() as Map<String, dynamic>;
+                        String documentId = document.id;
+                        String roomTitle = data['title'];
+                        String roomProvider = data['provider'];
+                        int roomDiscountedPrice =
+                            (data['rent'] - data['discount']);
+                        int roomOriginalPrice = data['rent'];
+                        String roomTimespan = data['timespan'];
+                        return RoomCard(
+                          thumbnailpath: thumbnailpaths[index],
+                          title: roomTitle,
+                          provider: roomProvider,
+                          discountedPrice: roomDiscountedPrice,
+                          timespan: roomTimespan,
+                          originalPrice: roomOriginalPrice,
+                          roomId: documentId,
+                        );
+                      });
+                },
+              ),
+              const SectionHeading(
+                text: 'Horizontal Room Card',
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: firestoreService.getRoomsStream(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return SizedBox(
+                        height: MediaQuery.of(context).size.height / 2,
+                        child:
+                            const Center(child: CircularProgressIndicator()));
+                  }
+                  List roomsList = snapshot.data!.docs;
+                  return ListView.builder(
+                      itemCount: roomsList.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot document = roomsList[index];
+                        Map<String, dynamic> data =
+                            document.data() as Map<String, dynamic>;
+                        String documentId = document.id;
+                        String roomTitle = data['title'];
+                        String roomProvider = data['provider'];
+                        int roomDiscountedPrice =
+                            (data['rent'] - data['discount']);
+                        int roomOriginalPrice = data['rent'];
+                        String roomTimespan = data['timespan'];
+                        return RoomCardHorizontal(
+                          thumbnailpath: thumbnailpaths[index],
+                          title: roomTitle,
+                          provider: roomProvider,
+                          discountedPrice: roomDiscountedPrice,
+                          timespan: roomTimespan,
+                          originalPrice: roomOriginalPrice,
+                          roomId: documentId,
+                        );
+                      });
+                },
               ),
             ],
           ),

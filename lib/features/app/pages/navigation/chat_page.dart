@@ -22,29 +22,30 @@ class _ChatPageState extends State<ChatPage> {
             if (snapshot.hasData) {
               List usersList = snapshot.data!.docs;
               return ListView.builder(
-                  itemCount: usersList.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot document = usersList[index];
-                    Map<String, dynamic> data =
-                        document.data() as Map<String, dynamic>;
-                    String userProvider = data['provider'];
-                    String userEmail = data['email'];
-                    var userPic = data['profilepic'];
-                    return ListTile(
-                      leading: SizedBox(
-                        height: 100,
-                        width: 50,
-                        child: userPic != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image(
-                                    image: NetworkImage(userPic, scale: 0.5)))
-                            : Icon(FontAwesomeIcons.circleUser),
-                      ),
-                      title: Text(userEmail),
-                      trailing: Text(userProvider),
-                    );
-                  });
+                itemCount: usersList.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot document = usersList[index];
+                  Map<String, dynamic> data =
+                      document.data() as Map<String, dynamic>;
+                  String userProvider = data['provider'];
+                  String userEmail = data['email'];
+                  var userPic = data['profilepic'];
+                  return ListTile(
+                    leading: SizedBox(
+                      height: 100,
+                      width: 50,
+                      child: userPic != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image(
+                                  image: NetworkImage(userPic, scale: 0.5)))
+                          : Icon(FontAwesomeIcons.circleUser),
+                    ),
+                    title: Text(userEmail),
+                    trailing: Text(userProvider),
+                  );
+                },
+              );
             } else {
               return const Center(
                 child: Text(

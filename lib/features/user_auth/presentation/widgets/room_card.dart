@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 
 class RoomCard extends StatelessWidget {
   final String? title;
-  final int? price;
-  final int? discount;
+  final int? discountedPrice;
+  final int? originalPrice;
   final String? thumbnailpath;
   final String? currency;
   final String? timespan;
   final String? provider;
+  final String roomId;
   const RoomCard({
     super.key,
     this.title,
-    this.price,
-    this.discount,
+    this.discountedPrice,
+    this.originalPrice,
     this.thumbnailpath,
     this.currency = 'PKR',
     this.timespan,
     this.provider = 'ExloreXpert',
+    required this.roomId,
   });
 
   @override
@@ -67,14 +69,14 @@ class RoomCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      '$currency $price/$timespan'.toUpperCase(),
+                      '$currency $discountedPrice/$timespan'.toUpperCase(),
                       style: const TextStyle(
                           color: EXColors.activeText,
                           fontWeight: FontWeight.bold,
                           fontSize: 12),
                     ),
                     Text(
-                      '$discount',
+                      '$originalPrice',
                       style: const TextStyle(
                           decoration: TextDecoration.lineThrough,
                           decorationColor: EXColors.secondaryDark,
@@ -92,7 +94,7 @@ class RoomCard extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RoomDetailsPage()));
+                            builder: (context) => RoomDetailsPage(roomId)));
                   },
                   color: EXColors.specialDark,
                   height: 25,

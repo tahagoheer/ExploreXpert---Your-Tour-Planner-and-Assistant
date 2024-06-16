@@ -1,16 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:explorexpert/features/app/pages/profile/profile_setup_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/login_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/form_field_container_widget.dart';
-import 'package:explorexpert/global/navigation_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
-import '../../firebase_auth_implementation/save_user_google.dart';
+import '../../firebase_auth_implementation/save_user.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -22,19 +22,20 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _fullnameController = TextEditingController();
+  String joinDate = DateFormat('dd MMMM yyyy').format(DateTime.now());
 
   bool isSigningUp = false;
   @override
   void dispose() {
-    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _fullnameController.dispose();
     super.dispose();
   }
 
@@ -103,10 +104,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         FormFieldContainerWidget(
-                          hintText: 'Enter Username',
-                          labelText: 'Username',
+                          hintText: 'Enter Full Name',
+                          labelText: 'Full Name',
                           isPasswordField: false,
-                          controller: _usernameController,
+                          controller: _fullnameController,
                         ),
                         const SizedBox(height: 10),
                         FormFieldContainerWidget(
@@ -115,6 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           isPasswordField: false,
                           controller: _emailController,
                         ),
+                        const SizedBox(height: 10),
                         const SizedBox(height: 10),
                         FormFieldContainerWidget(
                           hintText: 'Set a Password',
@@ -302,9 +304,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _signUp() async {
     String email = _emailController.text;
-    String username = _usernameController.text;
     String password = _passwordController.text;
     String confirmPassword = _confirmPasswordController.text;
+    String fullname = _fullnameController.text;
 
     if (password == confirmPassword) {
       setState(() {
@@ -316,20 +318,14 @@ class _SignUpPageState extends State<SignUpPage> {
         isSigningUp = false;
       });
       if (user != null) {
-        await FirebaseFirestore.instance
-            .collection("users_traveler")
-            .doc(user.email)
-            .set({
-          "email": user.email,
-          "username": username,
-          "profilepic": "null",
-          "provider": "Email",
-        });
+        await saveUserEmail(user, user.email!, fullname, password, joinDate);
         showToast(message: "User is successfully created");
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const NavigationMenu()),
-            (route) => false);
+        if (mounted) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const SetupProfile()),
+              (route) => false);
+        }
       } else {
         showToast(message: "Some error happened");
       }
@@ -355,9 +351,12 @@ class _SignUpPageState extends State<SignUpPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        await saveUserGoogle(googleSignInAccount);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const NavigationMenu()));
+        await saveUserGoogle(googleSignInAccount, joinDate);
+        showToast(message: "Successfully logged in with Google");
+        if (mounted) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SetupProfile()));
+        }
       }
     } catch (e) {
       showToast(message: "some error occurred $e");

@@ -3,7 +3,7 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/room_card.d
 import 'package:explorexpert/features/user_auth/presentation/widgets/section_heading.dart';
 import 'package:flutter/material.dart';
 
-import '../../../user_auth/presentation/utilities/get_rooms.dart';
+import '../../../repos/fetch_data/get_rooms.dart';
 import '../../../user_auth/presentation/widgets/hotel_type_card.dart';
 import '../../../user_auth/presentation/widgets/places_card.dart';
 
@@ -46,22 +46,22 @@ class _HomePageState extends State<HomePage> {
                     PlacesCard(
                       thumbnailpath: 'assets/images/allHotel1.png',
                       title: 'Islamabad',
-                      query_city: 'islamabad',
+                      querycity: 'islamabad',
                     ),
                     PlacesCard(
                       thumbnailpath: 'assets/images/allHotel2.png',
                       title: 'Lahore',
-                      query_city: 'lahore',
+                      querycity: 'lahore',
                     ),
                     PlacesCard(
                       thumbnailpath: 'assets/images/allHotel3.png',
                       title: 'Multan',
-                      query_city: 'multan',
+                      querycity: 'multan',
                     ),
                     PlacesCard(
                       thumbnailpath: 'assets/images/allHotel4.png',
                       title: 'Faisalabad',
-                      query_city: 'faisalabad',
+                      querycity: 'faisalabad',
                     ),
                   ],
                 ),

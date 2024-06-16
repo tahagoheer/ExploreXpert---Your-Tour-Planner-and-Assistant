@@ -6,8 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 import '../../../../global/toast.dart';
-import '../../firebase_auth_implementation/save_user_google.dart';
+import '../../firebase_auth_implementation/save_user.dart';
 
 class AuthViaPage extends StatefulWidget {
   const AuthViaPage({super.key});
@@ -18,6 +19,7 @@ class AuthViaPage extends StatefulWidget {
 
 class _AuthViaPageState extends State<AuthViaPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String joinDate = DateFormat('dd MMMM yyyy').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -300,9 +302,11 @@ class _AuthViaPageState extends State<AuthViaPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        await saveUserGoogle(googleSignInAccount);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const NavigationMenu()));
+        await saveUserGoogle(googleSignInAccount, joinDate);
+        if (mounted) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const NavigationMenu()));
+        }
       }
     } catch (e) {
       showToast(message: "some error occured $e");

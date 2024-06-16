@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/navigation/nav_widgets/ex_appbar.dart';
-import 'package:explorexpert/features/app/pages/navigation/utilities/get_places.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:explorexpert/features/repos/fetch_data/get_places.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../user_auth/presentation/widgets/hotel_card.dart';
 import '../../../../../user_auth/presentation/widgets/room_card_horizontal.dart';
 import '../../../../../user_auth/presentation/widgets/section_heading.dart';
-import '../../utilities/camel_case_text.dart';
+import '../../../../../../global/utilities/camel_case_text.dart';
 
 class PlacesPage extends StatefulWidget {
   final String queryCity;

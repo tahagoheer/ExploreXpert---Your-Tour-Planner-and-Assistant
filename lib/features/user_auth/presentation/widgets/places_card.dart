@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class PlacesCard extends StatelessWidget {
   final String? thumbnailpath;
   final String? title;
-  final String query_city;
+  final String querycity;
   const PlacesCard({
     super.key,
     this.thumbnailpath,
     this.title,
-    required this.query_city,
+    required this.querycity,
   });
 
   @override
@@ -49,7 +49,7 @@ class PlacesCard extends StatelessWidget {
       ),
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlacesPage(query_city)));
+            MaterialPageRoute(builder: (context) => PlacesPage(querycity)));
       },
     );
   }

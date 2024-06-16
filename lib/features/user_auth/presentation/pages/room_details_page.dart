@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/room_booking_page.dart';
 import 'package:flutter/material.dart';
-import '../utilities/get_room_details.dart';
+import '../../../repos/fetch_data/get_room_details.dart';
 import '../widgets/essentials.dart';
 
 class RoomDetailsPage extends StatefulWidget {
@@ -89,7 +89,8 @@ class _RoomDetailsPageState extends State<RoomDetailsPage> {
                       if (!snapshot.hasData) {
                         return SizedBox(
                             height: MediaQuery.of(context).size.height / 2,
-                            child: Center(child: CircularProgressIndicator()));
+                            child: const Center(
+                                child: CircularProgressIndicator()));
                       }
                       var roomData =
                           snapshot.data!.data() as Map<String, dynamic>;

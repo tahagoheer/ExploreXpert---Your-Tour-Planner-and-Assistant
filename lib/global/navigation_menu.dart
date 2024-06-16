@@ -7,6 +7,7 @@ import 'package:explorexpert/features/app/pages/navigation/search_page.dart';
 import 'package:flutter/material.dart';
 
 import '../features/app/pages/navigation/nav_widgets/ex_drawer.dart';
+import '../features/app/pages/profile/profile_setup_page.dart';
 import '../features/user_auth/presentation/widgets/essentials.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -29,7 +30,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: EXDrawer(),
+      drawer: const EXDrawer(),
       appBar: const EXAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: const TextStyle(

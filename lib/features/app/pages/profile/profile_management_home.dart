@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/profile/profile_edit.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_menu.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../global/utilities/current_user_details.dart';
+import 'package:explorexpert/features/repos/fetch_data/get_users.dart';
 
 class ProfileManagement extends StatefulWidget {
   const ProfileManagement({super.key});
@@ -12,9 +16,7 @@ class ProfileManagement extends StatefulWidget {
 }
 
 class _ProfileManagementState extends State<ProfileManagement> {
-  final String name = 'Taha Ahmad';
-
-  final String email = 'taha@gmail.com';
+  final FireStoreService firestoreService = FireStoreService();
 
   @override
   Widget build(BuildContext context) {
@@ -32,63 +34,87 @@ class _ProfileManagementState extends State<ProfileManagement> {
             padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: Container(
-                        width: 100 * 2 + 5 * 2,
-                        height: 100 * 2 + 5 * 2,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: EXColors.primaryDark, // The color of the ring
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: const Image(
-                              image:
-                                  AssetImage('assets/images/userprofile1.png'),
-                              fit: BoxFit.cover,
-                            ),
+                FutureBuilder<DocumentSnapshot>(
+                    future: firestoreService
+                        .getCurrentUserStream(EXCurrentUser.email),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const SizedBox(
+                            height: 100 * 2 + 5 * 2,
+                            child: Center(child: CircularProgressIndicator()));
+                      }
+                      var currentUser =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Stack(
+                            children: [
+                              SizedBox(
+                                height: 120,
+                                width: 120,
+                                child: Container(
+                                  width: 100 * 2 + 5 * 2,
+                                  height: 100 * 2 + 5 * 2,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: EXColors
+                                        .primaryDark, // The color of the ring
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: (currentUser['profilepic'] == null)
+                                          ? const Icon(
+                                              FontAwesomeIcons.solidCircleUser,
+                                              size: 100,
+                                            )
+                                          : Image(
+                                              image: NetworkImage(
+                                                  currentUser['profilepic']),
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: EXColors.primaryLight,
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit,
+                                          size: 20.0,
+                                          color: EXColors.primaryDark)),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: EXColors.primaryLight,
-                        ),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.edit,
-                                size: 20.0, color: EXColors.primaryDark)),
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  name,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  email,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal),
-                ),
+                          Text(
+                            currentUser['name'].toString(),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            currentUser['email'],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      );
+                    }),
                 const Padding(
                   padding: EdgeInsets.only(top: 30, bottom: 10),
                   child: Divider(),

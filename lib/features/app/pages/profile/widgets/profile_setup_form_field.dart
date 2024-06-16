@@ -1,34 +1,39 @@
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';
 
-class ProfileFormField extends StatelessWidget {
-  const ProfileFormField(
-      {super.key,
-      this.controller,
-      required this.preIcon,
-      this.fieldKey,
-      this.labelText,
-      this.onSaved,
-      this.validator,
-      this.onFieldSubmitted,
-      this.inputType,
-      required this.isEnabled});
+class ProfileSetupFormField extends StatelessWidget {
+  const ProfileSetupFormField({
+    super.key,
+    this.controller,
+    required this.preIcon,
+    this.fieldKey,
+    this.labelText,
+    this.onSaved,
+    this.validator,
+    this.onFieldSubmitted,
+    this.inputType,
+    required this.isEnabled,
+    this.initialValue,
+  });
   final TextEditingController? controller;
   final IconData preIcon;
   final Key? fieldKey;
   final String? labelText;
+  final String? initialValue;
   final FormFieldSetter<String>? onSaved;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputType? inputType;
   final bool isEnabled;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: TextFormField(
+          initialValue: initialValue,
           style: const TextStyle(
             color: Colors.black,
           ),
@@ -62,9 +67,6 @@ class ProfileFormField extends StatelessWidget {
             ),
             hintStyle: const TextStyle(color: Colors.black45),
           ),
-          onTapOutside: (event) {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
         ),
       ),
     );

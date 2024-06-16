@@ -1,3 +1,4 @@
+import 'package:explorexpert/features/app/pages/profile/profile_setup_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/forgot_password_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/pages/sign_up_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
@@ -7,10 +8,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../global/toast.dart';
 import '../../firebase_auth_implementation/firebase_auth_services.dart';
-import '../../firebase_auth_implementation/save_user_google.dart';
+import '../../firebase_auth_implementation/save_user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  String joinDate = DateFormat('dd MMMM yyyy').format(DateTime.now());
   bool _isSigning = false;
   @override
   void dispose() {
@@ -322,10 +325,12 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       showToast(message: "User is successfully signed in");
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const NavigationMenu()),
-          (route) => false);
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const NavigationMenu()),
+            (route) => false);
+      }
     } else {
       showToast(message: "some error occured");
     }
@@ -348,11 +353,13 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        await saveUserGoogle(googleSignInAccount);
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const NavigationMenu()),
-            (route) => false);
+        await saveUserGoogle(googleSignInAccount, joinDate);
+        if (mounted) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const SetupProfile()),
+              (route) => false);
+        }
       }
     } catch (e) {
       showToast(message: "some error occured $e");

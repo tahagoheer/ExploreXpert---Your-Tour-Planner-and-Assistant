@@ -73,7 +73,7 @@ class _EditProfileState extends State<EditProfile> {
                   _cityController.text = currentUser['city'] ?? '';
                   _countryController.text = currentUser['country'] ?? '';
                   _dobController.text = _dateTime ?? currentUser['dob'];
-                  String _gender = _selectedOption ?? currentUser['gender'];
+                  String gender = _selectedOption ?? currentUser['gender'];
                   return Column(
                     children: [
                       Stack(
@@ -111,8 +111,15 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 30,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        child: Text(
+                          currentUser['email'],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal),
+                        ),
                       ),
                       Form(
                         child: Column(
@@ -158,7 +165,7 @@ class _EditProfileState extends State<EditProfile> {
                                     children: [
                                       Radio(
                                           value: 'male',
-                                          groupValue: _gender,
+                                          groupValue: gender,
                                           onChanged: editEnabled
                                               ? _handleRadioValueChange
                                               : null),
@@ -169,7 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                                     children: [
                                       Radio(
                                           value: 'female',
-                                          groupValue: _gender,
+                                          groupValue: gender,
                                           onChanged: editEnabled
                                               ? _handleRadioValueChange
                                               : null),

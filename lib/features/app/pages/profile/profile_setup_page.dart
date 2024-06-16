@@ -120,8 +120,15 @@ class _SetupProfileState extends State<SetupProfile> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 30,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        child: Text(
+                          currentUser['email'],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal),
+                        ),
                       ),
                       Form(
                         child: Column(

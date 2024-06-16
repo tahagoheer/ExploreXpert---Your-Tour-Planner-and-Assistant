@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../global/utilities/current_user_details.dart';
 import '../../../repos/fetch_data/get_users.dart';
 import '../../../user_auth/presentation/widgets/essentials.dart';
-import '../profile/profile_edit.dart';
+import '../profile/profile_edit_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

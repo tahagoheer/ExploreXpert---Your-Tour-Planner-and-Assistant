@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:explorexpert/features/app/pages/profile/profile_edit.dart';
+import 'package:explorexpert/features/app/pages/profile/profile_edit_page.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_menu.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';

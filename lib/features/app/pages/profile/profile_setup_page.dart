@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_setup_form_field.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_setup_form_field_flex.dart';
 import 'package:explorexpert/features/user_auth/firebase_auth_implementation/update_user.dart';
 import 'package:explorexpert/global/toast.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../global/navigation_menu.dart';
@@ -24,6 +28,40 @@ class _SetupProfileState extends State<SetupProfile> {
 
   String? _selectedOption;
   String? _dateTime;
+
+  File? _image;
+  String? _imageUrl;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery, maxWidth: 200, maxHeight: 200);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+      String? downloadUrl = await _uploadImage();
+      setState(() {
+        _imageUrl = downloadUrl!;
+      });
+    }
+  }
+
+  Future<String?> _uploadImage() async {
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref('Users/Traveler/Images/ProfilePictures/');
+      final imagesRef =
+          storageRef.child('${DateTime.now().toIso8601String()}.jpg');
+      await imagesRef.putFile(_image!);
+
+      final downloadURL = await imagesRef.getDownloadURL();
+      return downloadURL;
+    } catch (e) {
+      return null;
+    }
+  }
 
   void _showDatePicker() {
     showDatePicker(
@@ -92,14 +130,18 @@ class _SetupProfileState extends State<SetupProfile> {
                             width: 120,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: (currentUser['profilepic'] == null)
-                                    ? const Icon(
-                                        FontAwesomeIcons.solidCircleUser,
-                                        size: 100,
+                                child: (_image != null)
+                                    ? Image(
+                                        image: FileImage(_image!),
                                       )
-                                    : Image(
-                                        image: NetworkImage(
-                                            currentUser['profilepic']))),
+                                    : ((currentUser['profilepic'] == null)
+                                        ? const Icon(
+                                            FontAwesomeIcons.solidCircleUser,
+                                            size: 100,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                                currentUser['profilepic'])))),
                           ),
                           Positioned(
                             right: 0,
@@ -112,7 +154,7 @@ class _SetupProfileState extends State<SetupProfile> {
                                 color: EXColors.primaryLight,
                               ),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: _pickImage,
                                 icon: const Icon(Icons.camera_alt,
                                     size: 20.0, color: EXColors.primaryDark),
                               ),
@@ -153,6 +195,7 @@ class _SetupProfileState extends State<SetupProfile> {
                                   IconButton(
                                       onPressed: () {
                                         _showDatePicker();
+                                        _imageUrl ??= currentUser['profilepic'];
                                       },
                                       icon: const Icon(
                                           Icons.calendar_month_outlined)),
@@ -260,14 +303,23 @@ class _SetupProfileState extends State<SetupProfile> {
   }
 
   void _updateProfile() async {
+    if (_dateTime == null) {
+      showToast(message: 'Please Select Date Of Birth');
+    } else if (_selectedOption == null) {
+      showToast(message: 'Please Select Gender');
+    }
+    var newProfilepic = _imageUrl;
     String newName = _nameController.text;
     String newDOB = _dateTime!;
     String newGender = _selectedOption!;
     String newCity = _cityController.text;
     String newCountry = _countryController.text;
     String email = EXCurrentUser.email;
-    await updateUser(email, newName, newDOB, newGender, newCity, newCountry);
+
+    await updateUser(
+        email, newName, newDOB, newGender, newCity, newCountry, newProfilepic);
     showToast(message: 'Profile updated Successfuly!');
+
     if (mounted) {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const NavigationMenu()));

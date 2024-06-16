@@ -5,7 +5,6 @@ import 'package:explorexpert/features/app/pages/navigation/nav_widgets/ex_appbar
 import 'package:explorexpert/features/app/pages/navigation/profile_page.dart';
 import 'package:explorexpert/features/app/pages/navigation/search_page.dart';
 import 'package:flutter/material.dart';
-
 import '../features/app/pages/navigation/nav_widgets/ex_drawer.dart';
 import '../features/user_auth/presentation/widgets/essentials.dart';
 

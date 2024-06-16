@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../../user_auth/presentation/widgets/hotel_card.dart';
 import '../../../../../user_auth/presentation/widgets/room_card_horizontal.dart';
 import '../../../../../user_auth/presentation/widgets/section_heading.dart';
-import '../../../../../../global/utilities/camel_case_text.dart';
+import '../../../../../../global/utilities/capitalize_first_letter.dart';
 
 class PlacesPage extends StatefulWidget {
   final String queryCity;

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_edit_form_field.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_edit_form_field_flex.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../global/toast.dart';
@@ -23,6 +27,41 @@ class _EditProfileState extends State<EditProfile> {
   bool editEnabled = false;
   String? _selectedOption;
   String? _dateTime;
+
+  File? _image;
+  String? _imageUrl;
+  bool _checkboxValue = false;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery, maxWidth: 200, maxHeight: 200);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+      String? downloadUrl = await _uploadImage();
+      setState(() {
+        _imageUrl = downloadUrl;
+      });
+    }
+  }
+
+  Future<String?> _uploadImage() async {
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref('Users/Traveler/Images/ProfilePictures/');
+      final imagesRef =
+          storageRef.child('${DateTime.now().toIso8601String()}.jpg');
+      await imagesRef.putFile(_image!);
+
+      final downloadURL = await imagesRef.getDownloadURL();
+      return downloadURL;
+    } catch (e) {
+      return null;
+    }
+  }
 
   void _showDatePicker() {
     showDatePicker(
@@ -74,6 +113,7 @@ class _EditProfileState extends State<EditProfile> {
                   _countryController.text = currentUser['country'] ?? '';
                   _dobController.text = _dateTime ?? currentUser['dob'];
                   String gender = _selectedOption ?? currentUser['gender'];
+
                   return Column(
                     children: [
                       Stack(
@@ -83,14 +123,18 @@ class _EditProfileState extends State<EditProfile> {
                             width: 120,
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
-                                child: (currentUser['profilepic'] == null)
-                                    ? const Icon(
-                                        FontAwesomeIcons.solidCircleUser,
-                                        size: 100,
+                                child: (_image != null)
+                                    ? Image(
+                                        image: FileImage(_image!),
                                       )
-                                    : Image(
-                                        image: NetworkImage(
-                                            currentUser['profilepic']))),
+                                    : ((currentUser['profilepic'] == null)
+                                        ? const Icon(
+                                            FontAwesomeIcons.solidCircleUser,
+                                            size: 100,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                                currentUser['profilepic'])))),
                           ),
                           Positioned(
                             right: 0,
@@ -103,7 +147,7 @@ class _EditProfileState extends State<EditProfile> {
                                 color: EXColors.primaryLight,
                               ),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: _pickImage,
                                 icon: const Icon(Icons.camera_alt,
                                     size: 20.0, color: EXColors.primaryDark),
                               ),
@@ -201,6 +245,25 @@ class _EditProfileState extends State<EditProfile> {
                               preIcon: FontAwesomeIcons.globe,
                               labelText: 'Country',
                             ),
+                            Center(
+                              child: editEnabled
+                                  ? Row(
+                                      children: [
+                                        Checkbox(
+                                            value: _checkboxValue,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _imageUrl ??=
+                                                    currentUser['profilepic'];
+                                                _selectedOption ??= gender;
+                                                _checkboxValue = value!;
+                                              });
+                                            }),
+                                        const Text('Sure to update profile ?')
+                                      ],
+                                    )
+                                  : const Text(''),
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 30.0),
@@ -259,8 +322,9 @@ class _EditProfileState extends State<EditProfile> {
                                     width: MediaQuery.of(context).size.width *
                                         0.37,
                                     child: MaterialButton(
-                                      onPressed:
-                                          editEnabled ? _updateProfile : null,
+                                      onPressed: editEnabled && _checkboxValue
+                                          ? _updateProfile
+                                          : null,
                                       color: EXColors.primaryDark,
                                       disabledColor: EXColors.disabledText,
                                       height: 60,
@@ -296,7 +360,7 @@ class _EditProfileState extends State<EditProfile> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
+                              padding: const EdgeInsets.only(top: 5.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -348,6 +412,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   void _updateProfile() async {
+    var newProfilepic = _imageUrl;
     String newName = _nameController.text;
     String newDOB = _dobController.text;
     String newGender = _selectedOption!;
@@ -355,7 +420,8 @@ class _EditProfileState extends State<EditProfile> {
     String newCountry = _countryController.text;
     String email = EXCurrentUser.email;
 
-    await updateUser(email, newName, newDOB, newGender, newCity, newCountry);
+    await updateUser(
+        email, newName, newDOB, newGender, newCity, newCountry, newProfilepic);
     showToast(message: 'Profile updated Successfuly!');
     setState(() {
       editEnabled = false;

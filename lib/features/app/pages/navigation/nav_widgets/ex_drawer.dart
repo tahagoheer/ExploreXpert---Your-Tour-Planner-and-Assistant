@@ -64,16 +64,14 @@ class _EXDrawerState extends State<EXDrawer> {
             ),
             MaterialButton(
               onPressed: () {
-                setState(() {
-                  auth.signOut();
-                  showToast(message: 'Logged Out');
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
-                      (route) => false);
-                });
+                auth.signOut();
+                showToast(message: 'Logged Out');
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                    (route) => false);
               },
               child: const Row(children: [
                 Icon(Icons.logout),

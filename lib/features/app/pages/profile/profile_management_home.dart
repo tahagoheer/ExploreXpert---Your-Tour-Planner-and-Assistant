@@ -2,11 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:explorexpert/features/app/pages/profile/profile_edit_page.dart';
 import 'package:explorexpert/features/app/pages/profile/widgets/profile_menu.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../global/toast.dart';
 import '../../../../global/utilities/current_user_details.dart';
 import 'package:explorexpert/features/repos/fetch_data/get_users.dart';
+
+import '../../../user_auth/presentation/pages/login_page.dart';
 
 class ProfileManagement extends StatefulWidget {
   const ProfileManagement({super.key});
@@ -17,6 +21,7 @@ class ProfileManagement extends StatefulWidget {
 
 class _ProfileManagementState extends State<ProfileManagement> {
   final FireStoreService firestoreService = FireStoreService();
+  var auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +158,16 @@ class _ProfileManagementState extends State<ProfileManagement> {
                   icon: Icons.logout,
                   endIcon: false,
                   textColor: Colors.red,
-                  onPress: () {},
+                  onPress: () {
+                    auth.signOut();
+                    showToast(message: 'Logged Out');
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
+                  },
                 ),
               ],
             ),

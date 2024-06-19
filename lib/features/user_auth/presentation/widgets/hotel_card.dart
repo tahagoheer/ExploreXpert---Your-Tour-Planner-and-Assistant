@@ -1,6 +1,8 @@
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app/pages/navigation/results/places/hotel_details_page.dart';
+
 class HotelCard extends StatelessWidget {
   final String? name;
   final String? city;
@@ -60,7 +62,10 @@ class HotelCard extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HotelDetailsPage()));
+      },
     );
   }
 }

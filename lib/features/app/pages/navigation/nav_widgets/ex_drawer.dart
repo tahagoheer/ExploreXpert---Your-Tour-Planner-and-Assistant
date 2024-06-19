@@ -63,16 +63,7 @@ class _EXDrawerState extends State<EXDrawer> {
               },
             ),
             MaterialButton(
-              onPressed: () {
-                auth.signOut();
-                showToast(message: 'Logged Out');
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                    (route) => false);
-              },
+              onPressed: _signOut,
               child: const Row(children: [
                 Icon(Icons.logout),
                 Padding(
@@ -85,5 +76,23 @@ class _EXDrawerState extends State<EXDrawer> {
         ),
       ),
     );
+  }
+
+  void _signOut() async {
+    await auth.signOut();
+    _onSignOutComplete();
+  }
+
+  void _onSignOutComplete() {
+    showToast(message: 'Logged Out');
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+        (route) => false,
+      );
+    }
   }
 }

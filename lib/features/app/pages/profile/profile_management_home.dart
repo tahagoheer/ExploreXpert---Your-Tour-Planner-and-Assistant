@@ -158,16 +158,7 @@ class _ProfileManagementState extends State<ProfileManagement> {
                   icon: Icons.logout,
                   endIcon: false,
                   textColor: Colors.red,
-                  onPress: () async {
-                    await auth.signOut();
-                    showToast(message: 'Logged Out');
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                        (route) => false);
-                  },
+                  onPress: _signOut,
                 ),
               ],
             ),
@@ -175,5 +166,23 @@ class _ProfileManagementState extends State<ProfileManagement> {
         ),
       ),
     );
+  }
+
+  void _signOut() async {
+    await auth.signOut();
+    _onSignOutComplete();
+  }
+
+  void _onSignOutComplete() {
+    showToast(message: 'Logged Out');
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+        (route) => false,
+      );
+    }
   }
 }

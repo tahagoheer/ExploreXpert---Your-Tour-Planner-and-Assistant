@@ -27,7 +27,10 @@ class EXAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (!snapshot.hasData) {
                 return const SizedBox(
                     height: 25 * 2 + 5 * 2,
-                    child: Center(child: CircularProgressIndicator()));
+                    child: Padding(
+                      padding: EdgeInsets.all(3.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    ));
               }
               var currentUser = snapshot.data!.data() as Map<String, dynamic>;
               return IconButton(

@@ -20,7 +20,7 @@ class PlacesPage extends StatefulWidget {
 }
 
 class _PlacesPageState extends State<PlacesPage> {
-  final FireStoreService firestoreService = FireStoreService();
+  final FireStoreServicep firestoreService = FireStoreServicep();
   final thumbnailpaths = [
     'assets/images/allroom2.png',
     'assets/images/allroom1.png',
@@ -34,7 +34,7 @@ class _PlacesPageState extends State<PlacesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const EXAppBar(),
+      appBar: EXAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),

@@ -29,7 +29,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const EXDrawer(),
-      appBar: const EXAppBar(),
+      appBar: EXAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: const TextStyle(
           fontSize: 14,

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FireStoreService {
+class FireStoreServicep {
   final CollectionReference hotel =
       FirebaseFirestore.instance.collection('users_hotel');
   final CollectionReference rooms =

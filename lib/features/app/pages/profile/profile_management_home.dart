@@ -158,8 +158,8 @@ class _ProfileManagementState extends State<ProfileManagement> {
                   icon: Icons.logout,
                   endIcon: false,
                   textColor: Colors.red,
-                  onPress: () {
-                    auth.signOut();
+                  onPress: () async {
+                    await auth.signOut();
                     showToast(message: 'Logged Out');
                     Navigator.pushAndRemoveUntil(
                         context,

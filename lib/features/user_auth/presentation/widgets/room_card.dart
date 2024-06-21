@@ -2,6 +2,8 @@ import 'package:explorexpert/features/user_auth/presentation/pages/room_details_
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../global/utilities/price_in_k.dart';
+
 class RoomCard extends StatelessWidget {
   final String? title;
   final int? discountedPrice;
@@ -70,7 +72,9 @@ class RoomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        '$currency $discountedPrice/$timespan'.toUpperCase(),
+                        '$currency ${priceInK(discountedPrice!)}/$timespan'
+                            .toUpperCase(),
+                        overflow: TextOverflow.clip,
                         style: const TextStyle(
                             color: EXColors.activeText,
                             fontWeight: FontWeight.bold,

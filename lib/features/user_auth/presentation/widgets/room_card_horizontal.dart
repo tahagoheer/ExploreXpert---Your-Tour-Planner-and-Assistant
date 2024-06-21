@@ -2,6 +2,8 @@ import 'package:explorexpert/features/user_auth/presentation/pages/room_details_
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../global/utilities/price_in_k.dart';
+
 class RoomCardHorizontal extends StatelessWidget {
   final String? title;
   final int? discountedPrice;
@@ -82,7 +84,7 @@ class RoomCardHorizontal extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              '$discountedPrice',
+                              priceInK(discountedPrice!),
                               style: const TextStyle(
                                   color: EXColors.activeText,
                                   fontWeight: FontWeight.bold,

@@ -11,7 +11,7 @@ class FireStoreServicep {
     QuerySnapshot usersHotelSnapshot =
         await hotel.where('city', isEqualTo: city).get();
 
-    // Extracting provider names
+    // Extract provider names
     List<String> providerNames =
         usersHotelSnapshot.docs.map((doc) => doc['name'] as String).toList();
 
@@ -19,10 +19,17 @@ class FireStoreServicep {
       return [];
     }
 
-    // Getting rooms from rooms collection with the specified providers
+    // Get rooms from rooms collection with the specified providers
     QuerySnapshot roomsSnapshot =
         await rooms.where('provider', whereIn: providerNames).get();
     return roomsSnapshot.docs;
+  }
+
+  Future<List<QueryDocumentSnapshot>> getRoomsByProvider(
+      String provider) async {
+    QuerySnapshot roomsBYProviderSnapshot =
+        await rooms.where('provider', isEqualTo: provider).get();
+    return roomsBYProviderSnapshot.docs;
   }
 
   Future<QuerySnapshot> getHotelByPlaceStream(String city) {

@@ -1,5 +1,6 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/room_details_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/global/utilities/capitalize_first_letter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../global/utilities/price_in_k.dart';
@@ -58,22 +59,34 @@ class RoomCardHorizontal extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(
-                              '$title',
-                              style: const TextStyle(
-                                  color: EXColors.mainText,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14),
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                capitalizeFirstLetter(title!),
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                softWrap: true,
+                                style: const TextStyle(
+                                    color: EXColors.mainText,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            child: Text(
-                              '$provider',
-                              style: const TextStyle(
-                                  color: EXColors.mainText, fontSize: 12),
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                capitalizeFirstLetter(provider!),
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    color: EXColors.mainText, fontSize: 12),
+                              ),
                             ),
                           ),
                         ],
@@ -98,7 +111,7 @@ class RoomCardHorizontal extends StatelessWidget {
                                   fontSize: 8),
                             ),
                             Text(
-                              '$originalPrice',
+                              priceInK(originalPrice!),
                               style: const TextStyle(
                                   decoration: TextDecoration.lineThrough,
                                   decorationColor: EXColors.secondaryDark,

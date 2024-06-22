@@ -1,5 +1,6 @@
 import 'package:explorexpert/features/user_auth/presentation/pages/room_details_page.dart';
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/global/utilities/capitalize_first_letter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../global/utilities/price_in_k.dart';
@@ -48,22 +49,32 @@ class RoomCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Text(
-                    '$title',
-                    style: const TextStyle(
-                        color: EXColors.mainText,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
+                SizedBox(
+                  height: 27,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(
+                      capitalizeFirstLetter(title!),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: EXColors.mainText,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    '$provider',
-                    style:
-                        const TextStyle(color: EXColors.mainText, fontSize: 12),
+                SizedBox(
+                  height: 27,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Text(
+                      capitalizeFirstLetter(provider!),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: EXColors.mainText, fontSize: 12),
+                    ),
                   ),
                 ),
                 Padding(
@@ -81,7 +92,7 @@ class RoomCard extends StatelessWidget {
                             fontSize: 12),
                       ),
                       Text(
-                        '$originalPrice',
+                        priceInK(originalPrice!),
                         style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             decorationColor: EXColors.secondaryDark,

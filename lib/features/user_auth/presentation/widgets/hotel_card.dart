@@ -1,4 +1,5 @@
 import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.dart';
+import 'package:explorexpert/global/utilities/capitalize_first_letter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/pages/navigation/results/places/hotel_details_page.dart';
@@ -22,9 +23,12 @@ class HotelCard extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width / 2 - 10,
         child: Card(
+          borderOnForeground: true,
+          surfaceTintColor: Colors.blue,
+          elevation: 2,
           color: EXColors.secondaryLight,
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -32,7 +36,9 @@ class HotelCard extends StatelessWidget {
                   height: 180,
                   width: 175,
                   decoration: BoxDecoration(
+                    color: EXColors.primaryLight,
                     borderRadius: BorderRadius.circular(10),
+                    backgroundBlendMode: BlendMode.difference,
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage("$thumbnailpath"),
@@ -42,7 +48,7 @@ class HotelCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
-                    '$name',
+                    capitalizeFirstLetter(name!),
                     style: const TextStyle(
                         color: EXColors.mainText,
                         fontWeight: FontWeight.bold,
@@ -63,8 +69,12 @@ class HotelCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HotelDetailsPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HotelDetailsPage(
+                      hotelId: hotelId,
+                    )));
       },
     );
   }

@@ -66,7 +66,7 @@ class SearchPage extends StatelessWidget {
                   ),
                   MustVisitPlaces(
                     rating: 3.2,
-                    title: 'Vehari',
+                    title: 'Faisalabad',
                     thumbnailpath: 'assets/images/MVP4.png',
                   )
                 ],

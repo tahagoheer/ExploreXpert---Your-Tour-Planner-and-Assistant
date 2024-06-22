@@ -11,7 +11,7 @@ class VisitedGrid extends StatelessWidget {
     'Multan',
     'Lahore',
     'Islamabad',
-    'Vehari',
+    'Faisalabad',
   ];
   final ratings = [3.9, 4.1, 4.7, 3.2];
   VisitedGrid({super.key});
@@ -47,8 +47,9 @@ class VisitedGrid extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 8,
-            top: 130,
+            left: 6,
+            right: 10,
+            bottom: 20,
             child: Text(
               titles[index],
               style: const TextStyle(

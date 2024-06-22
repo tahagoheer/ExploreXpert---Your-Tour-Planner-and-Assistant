@@ -15,4 +15,9 @@ class FireStoreService {
         hotel.where('name', isEqualTo: roomProvider).get();
     return hotelDetailsStream;
   }
+
+  Future<DocumentSnapshot> getHotelDetails(String hotelID) {
+    final hotelDetails = hotel.doc(hotelID).get();
+    return hotelDetails;
+  }
 }

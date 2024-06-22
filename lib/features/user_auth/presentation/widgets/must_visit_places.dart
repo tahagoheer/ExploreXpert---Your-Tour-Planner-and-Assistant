@@ -32,8 +32,9 @@ class MustVisitPlaces extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 8,
-          top: 120,
+          left: 6,
+          right: 10,
+          bottom: 10,
           child: Text(
             '$title',
             style: const TextStyle(

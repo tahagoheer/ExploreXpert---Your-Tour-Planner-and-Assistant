@@ -25,7 +25,7 @@ class PlacesCard extends StatelessWidget {
             ),
             margin: const EdgeInsets.only(right: 10),
             height: 100,
-            width: 125,
+            width: 135,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,

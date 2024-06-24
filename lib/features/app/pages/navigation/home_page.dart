@@ -63,6 +63,11 @@ class _HomePageState extends State<HomePage> {
                       title: 'Faisalabad',
                       querycity: 'faisalabad',
                     ),
+                    PlacesCard(
+                      thumbnailpath: 'assets/images/DG2.png',
+                      title: 'Karachi',
+                      querycity: 'karachi',
+                    ),
                   ],
                 ),
               ),
@@ -123,8 +128,9 @@ class _HomePageState extends State<HomePage> {
                             (data['rent'] - data['discount']);
                         int roomOriginalPrice = data['rent'];
                         String roomTimespan = data['timespan'];
+                        String roomThumbnail = data['images'][0];
                         return RoomCard(
-                          thumbnailpath: thumbnailpaths[index],
+                          thumbnailpath: roomThumbnail,
                           title: roomTitle,
                           provider: roomProvider,
                           discountedPrice: roomDiscountedPrice,

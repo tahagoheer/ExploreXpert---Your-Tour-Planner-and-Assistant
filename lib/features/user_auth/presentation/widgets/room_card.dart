@@ -45,7 +45,7 @@ class RoomCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage("$thumbnailpath"),
+                      image: NetworkImage("$thumbnailpath"),
                     ),
                   ),
                 ),

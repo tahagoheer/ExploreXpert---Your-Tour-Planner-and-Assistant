@@ -41,7 +41,7 @@ class HotelCard extends StatelessWidget {
                     backgroundBlendMode: BlendMode.difference,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("$thumbnailpath"),
+                      image: NetworkImage("$thumbnailpath"),
                     ),
                   ),
                 ),

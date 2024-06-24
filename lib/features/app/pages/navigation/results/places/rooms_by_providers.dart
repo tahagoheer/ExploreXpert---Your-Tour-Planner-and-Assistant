@@ -20,16 +20,6 @@ class RoomsByProviderPage extends StatefulWidget {
 
 class _RoomsByProviderPageState extends State<RoomsByProviderPage> {
   final FireStoreServicep firestoreService = FireStoreServicep();
-  final thumbnailpaths = [
-    'assets/images/allroom2.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom2.png',
-    'assets/images/allroom2.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom2.png'
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +61,7 @@ class _RoomsByProviderPageState extends State<RoomsByProviderPage> {
                         int roomOriginalPrice = data['rent'];
                         String roomTimespan = data['timespan'];
                         return RoomCardHorizontal(
-                          thumbnailpath: thumbnailpaths[index],
+                          thumbnailpath: data['images'][0],
                           title: roomTitle,
                           provider: roomProvider,
                           discountedPrice: roomDiscountedPrice,

@@ -18,6 +18,7 @@ class HotelDetailsPage extends StatefulWidget {
 
 class _HotelDetailsPageState extends State<HotelDetailsPage> {
   final FireStoreService firestoreService = FireStoreService();
+  String? bgGif;
   void showBottomSheet() {
     showModalBottomSheet(
       showDragHandle: true,
@@ -120,16 +121,16 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                                   textAlign: TextAlign.justify,
                                 ),
                               ),
-                              const Row(
+                              Row(
                                 children: [
                                   PictureCard(
-                                    thumbnailpath: 'assets/images/city1.png',
+                                    thumbnailpath: hotelData['images'][0],
                                   ),
                                   PictureCard(
-                                    thumbnailpath: 'assets/images/city2.png',
+                                    thumbnailpath: hotelData['images'][1],
                                   ),
                                   PictureCard(
-                                    thumbnailpath: 'assets/images/city3.png',
+                                    thumbnailpath: hotelData['images'][2],
                                   ),
                                 ],
                               ),
@@ -195,9 +196,11 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/images/multan-gif.gif'),
+            image: (bgGif == null)
+                ? const AssetImage('assets/images/ExploreXpertLogoPrimary.png')
+                : AssetImage(bgGif!),
             fit: BoxFit.cover,
             opacity: 0.7),
       ),
@@ -269,7 +272,37 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                   child: const Center(child: CircularProgressIndicator()));
             }
             var hotelData = snapshot.data!.data() as Map<String, dynamic>;
-
+            if (hotelData['city'] == 'multan') {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  bgGif = 'assets/gifs/multan-gif.gif';
+                });
+              });
+            } else if (hotelData['city'] == 'faisalabad') {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  bgGif = 'assets/gifs/faisalabad-gif.gif';
+                });
+              });
+            } else if (hotelData['city'] == 'islamabad') {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  bgGif = 'assets/gifs/islamabad-gif.gif';
+                });
+              });
+            } else if (hotelData['city'] == 'lahore') {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  bgGif = 'assets/gifs/lahore-gif.gif';
+                });
+              });
+            } else if (hotelData['city'] == 'karachi') {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  bgGif = 'assets/gifs/karachi-gif.gif';
+                });
+              });
+            }
             return GestureDetector(
               onVerticalDragEnd: (details) {
                 if (details.primaryVelocity! < 0) {

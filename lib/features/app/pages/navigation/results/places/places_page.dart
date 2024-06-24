@@ -21,16 +21,6 @@ class PlacesPage extends StatefulWidget {
 
 class _PlacesPageState extends State<PlacesPage> {
   final FireStoreServicep firestoreService = FireStoreServicep();
-  final thumbnailpaths = [
-    'assets/images/allroom2.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom2.png',
-    'assets/images/allroom2.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom1.png',
-    'assets/images/allroom2.png'
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,8 +61,9 @@ class _PlacesPageState extends State<PlacesPage> {
                         Map<String, dynamic> data =
                             document.data() as Map<String, dynamic>;
                         String documentId = document.id;
+                        String hotelThumbnail = data['images'][0];
                         return HotelCard(
-                          thumbnailpath: thumbnailpaths[index],
+                          thumbnailpath: hotelThumbnail,
                           name: data['name'],
                           city: data['city'].toUpperCase(),
                           hotelId: documentId,
@@ -108,8 +99,9 @@ class _PlacesPageState extends State<PlacesPage> {
                             (data['rent'] - data['discount']);
                         int roomOriginalPrice = data['rent'];
                         String roomTimespan = data['timespan'];
+                        String roomThumbnail = data['images'][0];
                         return RoomCardHorizontal(
-                          thumbnailpath: thumbnailpaths[index],
+                          thumbnailpath: roomThumbnail,
                           title: roomTitle,
                           provider: roomProvider,
                           discountedPrice: roomDiscountedPrice,

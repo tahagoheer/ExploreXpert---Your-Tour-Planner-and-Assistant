@@ -23,7 +23,7 @@ class PictureCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
               image: DecorationImage(
-                  fit: BoxFit.fill, image: AssetImage("$thumbnailpath")),
+                  fit: BoxFit.fill, image: NetworkImage("$thumbnailpath")),
             ),
           ),
           Positioned(

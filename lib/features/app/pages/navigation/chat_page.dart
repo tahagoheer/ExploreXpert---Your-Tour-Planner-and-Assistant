@@ -1,9 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:explorexpert/features/repos/fetch_data/get_users.dart';
-import 'package:explorexpert/global/utilities/current_user_details.dart';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../user_auth/presentation/widgets/essentials.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
+
+import 'package:image_picker/image_picker.dart';
+import '../../../../global/toast.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -13,155 +15,114 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final FireStoreService firestoreService = FireStoreService();
+  final Gemini gemini = Gemini.instance;
 
+  List<ChatMessage> messages = [];
+
+  ChatUser currentUser = ChatUser(id: "0", firstName: "User");
+  ChatUser geminiUser = ChatUser(
+    id: "1",
+    firstName: "Gemini",
+    profileImage:
+        "https://seeklogo.com/images/G/google-gemini-logo-A5787B2669-seeklogo.com.png",
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              FutureBuilder<DocumentSnapshot>(
-                  future: firestoreService
-                      .getCurrentUserStream(EXCurrentUser.email),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return SizedBox(
-                          height: MediaQuery.of(context).size.height / 2,
-                          child:
-                              const Center(child: CircularProgressIndicator()));
-                    }
-                    var currentUser =
-                        snapshot.data!.data() as Map<String, dynamic>;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            SizedBox(
-                              height: 120,
-                              width: 120,
-                              child: Container(
-                                width: 100 * 2 + 5 * 2,
-                                height: 100 * 2 + 5 * 2,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: EXColors
-                                      .primaryDark, // The color of the ring
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: (currentUser['profilepic'] == null)
-                                        ? const Icon(
-                                            FontAwesomeIcons.solidCircleUser,
-                                            size: 100,
-                                          )
-                                        : Image(
-                                            image: NetworkImage(
-                                                currentUser['profilepic']),
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: EXColors.primaryLight,
-                                ),
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.edit,
-                                        size: 20.0,
-                                        color: EXColors.primaryDark)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          currentUser['name'].toString(),
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          currentUser['email'],
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    );
-                  }),
-              const Divider(
-                height: 10,
-                thickness: 5,
-                color: Colors.green,
-              ),
-              StreamBuilder<QuerySnapshot>(
-                stream: firestoreService.getUsersStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List usersList = snapshot.data!.docs;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: usersList.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot document = usersList[index];
-                        Map<String, dynamic> data =
-                            document.data() as Map<String, dynamic>;
-                        String userProvider = data['provider'];
-                        String userEmail = data['email'];
-                        var userPic = data['profilepic'];
-                        return ListTile(
-                          leading: SizedBox(
-                            height: 100,
-                            width: 50,
-                            child: userPic != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image(
-                                      image: NetworkImage(
-                                        userPic,
-                                        scale: 0.5,
-                                      ),
-                                      fit: BoxFit.fill,
-                                    ))
-                                : const Icon(FontAwesomeIcons.circleUser),
-                          ),
-                          title: Text(userEmail),
-                          subtitle:
-                              Text(data['name'] ?? data['username'].toString()),
-                          trailing: Text(userProvider),
-                        );
-                      },
-                    );
-                  } else {
-                    return const Center(
-                      child: Text(
-                        'No notifications yet \n🙃🔕❤️‍🩹',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Virtual Guide",
         ),
       ),
+      body: _buildUI(),
     );
+  }
+
+  Widget _buildUI() {
+    return DashChat(
+      inputOptions: InputOptions(trailing: [
+        IconButton(
+          onPressed: _sendMediaMessage,
+          icon: const Icon(
+            Icons.image,
+          ),
+        )
+      ]),
+      currentUser: currentUser,
+      onSend: _sendMessage,
+      messages: messages,
+    );
+  }
+
+  void _sendMessage(ChatMessage chatMessage) {
+    setState(() {
+      messages = [chatMessage, ...messages];
+    });
+    try {
+      String question = chatMessage.text;
+      List<Uint8List>? images;
+      if (chatMessage.medias?.isNotEmpty ?? false) {
+        images = [
+          File(chatMessage.medias!.first.url).readAsBytesSync(),
+        ];
+      }
+      gemini
+          .streamGenerateContent(
+        question,
+        images: images,
+      )
+          .listen((event) {
+        ChatMessage? lastMessage = messages.firstOrNull;
+        if (lastMessage != null && lastMessage.user == geminiUser) {
+          lastMessage = messages.removeAt(0);
+          String response = event.content?.parts?.fold(
+                  "", (previous, current) => "$previous ${current.text}") ??
+              "";
+          lastMessage.text += response;
+          setState(
+            () {
+              messages = [lastMessage!, ...messages];
+            },
+          );
+        } else {
+          String response = event.content?.parts?.fold(
+                  "", (previous, current) => "$previous ${current.text}") ??
+              "";
+          ChatMessage message = ChatMessage(
+            user: geminiUser,
+            createdAt: DateTime.now(),
+            text: response,
+          );
+          setState(() {
+            messages = [message, ...messages];
+          });
+        }
+      });
+    } catch (e) {
+      showToast(message: '$e');
+    }
+  }
+
+  void _sendMediaMessage() async {
+    ImagePicker picker = ImagePicker();
+    XFile? file = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (file != null) {
+      ChatMessage chatMessage = ChatMessage(
+        user: currentUser,
+        createdAt: DateTime.now(),
+        text: "Describe this picture?",
+        medias: [
+          ChatMedia(
+            url: file.path,
+            fileName: "",
+            type: MediaType.image,
+          )
+        ],
+      );
+      _sendMessage(chatMessage);
+    }
   }
 }

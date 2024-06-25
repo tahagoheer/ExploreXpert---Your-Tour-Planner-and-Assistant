@@ -5,6 +5,8 @@ import 'package:explorexpert/features/user_auth/presentation/widgets/essentials.
 import 'package:explorexpert/global/navigation_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
+import 'consts.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,9 @@ void main() async {
   );
   FirebaseFirestore.instance.settings =
       const Settings(persistenceEnabled: true);
+  Gemini.init(
+    apiKey: GEMINI_API_KEY,
+  );
   runApp(const MyApp());
 }
 

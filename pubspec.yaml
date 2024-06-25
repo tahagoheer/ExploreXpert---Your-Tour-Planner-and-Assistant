@@ -48,10 +48,13 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   image_picker: ^1.1.2
   cached_network_image: ^3.3.1
+  flutter_gemini: ^2.0.3
+  dash_chat_2: ^0.0.20
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
